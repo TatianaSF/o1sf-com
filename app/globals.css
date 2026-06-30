@@ -259,12 +259,23 @@ p {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
+  gap: 5px;
+  color: #14172b;
+  text-decoration: none;
 }
 
-.site-signature-logo {
-  width: 154px;
-  height: 36px;
+.site-signature-mark {
+  width: 30px;
+  height: 30px;
   object-fit: contain;
+}
+
+.site-signature-brand {
+  color: #14172b;
+  font-size: 1rem;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 .header-signature {
@@ -1355,14 +1366,22 @@ h1 span,
     font-size: 0.62rem;
   }
 
-  .site-signature-logo {
-    width: 124px;
-    height: 29px;
+  .site-signature-mark {
+    width: 25px;
+    height: 25px;
   }
 
-  .header-signature .site-signature-logo {
-    width: 82px;
-    height: 19px;
+  .site-signature-brand {
+    font-size: 0.86rem;
+  }
+
+  .header-signature .site-signature-mark {
+    width: 18px;
+    height: 18px;
+  }
+
+  .header-signature .site-signature-brand {
+    font-size: 0.68rem;
   }
 
   .signature-separator {
@@ -1384,20 +1403,20 @@ h1 span,
   }
 
   .signature-built-with {
-    margin-left: -34px;
+    margin-left: 0;
     font-size: 0.66rem;
     line-height: 0.9;
   }
 
   .header-signature .signature-built-with {
-    margin-left: -20px;
+    margin-left: 0;
     font-size: 0.52rem;
   }
 
   .footer-signature {
     max-width: 100%;
     min-height: 24px;
-    gap: 3px;
+    gap: 5px;
     padding: 0;
     overflow: visible;
     color: #3d4653;
@@ -1407,9 +1426,13 @@ h1 span,
     box-shadow: none;
   }
 
-  .footer-signature .site-signature-logo {
-    width: clamp(74px, 24vw, 92px);
-    height: auto;
+  .footer-signature .site-signature-mark {
+    width: clamp(18px, 5vw, 22px);
+    height: clamp(18px, 5vw, 22px);
+  }
+
+  .footer-signature .site-signature-brand {
+    font-size: clamp(0.66rem, 3vw, 0.78rem);
   }
 
   .footer-signature .signature-icon {
