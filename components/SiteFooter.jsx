@@ -32,7 +32,6 @@ export function SiteFooter() {
         </div>
         <div className="footer-copy">
           <SiteSignature className="footer-signature" />
-          <p>Made with OpenAI Codex by TatianaSF</p>
         </div>
       </div>
     </footer>
