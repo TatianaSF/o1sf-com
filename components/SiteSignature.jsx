@@ -58,8 +58,8 @@ export function SiteSignature({
   const classes = ["site-signature", className].filter(Boolean).join(" ");
   const label =
     showMadeWith || showBuiltWithStack
-      ? "CodexSF built with OpenAI Codex by TatianaSF"
-      : "CodexSF OpenAI Codex by TatianaSF";
+      ? "O1SF built with OpenAI Codex by TatianaSF"
+      : "O1SF OpenAI Codex by TatianaSF";
 
   return (
     <div className={classes} aria-label={label}>

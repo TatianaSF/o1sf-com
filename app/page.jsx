@@ -63,6 +63,9 @@ function LandingSection({ section }) {
   }
 
   if (section.kind === "filter-list") {
+    const icons = ["room", "target", "building", "room", "chat"];
+    const cards = [section.main, ...section.paragraphs].filter(Boolean);
+
     return (
       <MobileSection id={anchor} className="other-side-section" ariaLabel={section.title}>
         <div className="section-card glass-card">
@@ -72,11 +75,10 @@ function LandingSection({ section }) {
               <span key={line}>{line}</span>
             ))}
           </h2>
-          <p className="main-question">{section.main}</p>
           <div className="filter-card-list">
-            {section.paragraphs.map((text) => (
+            {cards.map((text, index) => (
               <div className="filter-card" key={text}>
-                <Icon name="filter" />
+                <Icon name={icons[index] || "filter"} />
                 <p>{text}</p>
               </div>
             ))}
@@ -102,17 +104,17 @@ function LandingSection({ section }) {
   }
 
   if (section.kind === "moments") {
+    const moments = parseIconItems(section.items).map((item, index) => ({
+      ...item,
+      title: section.paragraphs[index] || item.title,
+    }));
+
     return (
       <MobileSection id={anchor} className="filter-section" ariaLabel={section.title}>
         <div className="section-card glass-card">
           <SectionHeader eyebrow={section.eyebrow} title={section.title} align="center" />
-          <div className="filter-copy">
-            {section.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
           <div className="moment-stack">
-            {parseIconItems(section.items).map((moment) => (
+            {moments.map((moment) => (
               <IconCard key={moment.title} icon={moment.icon} title={moment.title} variant="moment" />
             ))}
           </div>
@@ -151,10 +153,20 @@ function ParagraphStack({ paragraphs }) {
   return (
     <div className="copy-stack">
       {paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+        <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>
       ))}
     </div>
   );
+}
+
+function renderInlineMarkdown(text) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={part}>{part.slice(2, -2)}</strong>;
+    }
+
+    return part;
+  });
 }
 
 function splitField(value = "") {

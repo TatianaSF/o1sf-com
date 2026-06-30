@@ -1,7 +1,7 @@
 {
-  "name": "Codex SF",
-  "short_name": "CodexSF",
-  "description": "Open-source community hub for San Francisco builders, hackathons, and practical Codex workflows.",
+  "name": "O1SF",
+  "short_name": "O1SF",
+  "description": "O1SF landing page for professional visibility, context, and high-trust rooms in San Francisco.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

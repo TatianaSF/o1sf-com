@@ -18,11 +18,7 @@ export function Icon({ name, className = "" }) {
     case "signal":
       return (
         <svg {...common}>
-          <circle cx="24" cy="24" r="4" />
-          <path d="M17 17a10 10 0 0 0 0 14" />
-          <path d="M31 17a10 10 0 0 1 0 14" />
-          <path d="M11 12a18 18 0 0 0 0 24" />
-          <path d="M37 12a18 18 0 0 1 0 24" />
+          <path d="M24 6l5.1 11 12 1.4-8.8 8.2 2.3 11.8L24 32.4 13.4 38.4l2.3-11.8-8.8-8.2 12-1.4z" />
         </svg>
       );
     case "story":
@@ -47,6 +43,38 @@ export function Icon({ name, className = "" }) {
       return (
         <svg {...common}>
           <path d="M10 12h28L27 25v10l-6 3V25z" />
+        </svg>
+      );
+    case "target":
+      return (
+        <svg {...common}>
+          <circle cx="24" cy="24" r="17" />
+          <circle cx="24" cy="24" r="10" />
+          <circle cx="24" cy="24" r="3" />
+          <path d="M24 7v6" />
+          <path d="M24 35v6" />
+          <path d="M7 24h6" />
+          <path d="M35 24h6" />
+        </svg>
+      );
+    case "building":
+      return (
+        <svg {...common}>
+          <path d="M12 40V10h16v30" />
+          <path d="M28 18h8v22" />
+          <path d="M17 16h5" />
+          <path d="M17 23h5" />
+          <path d="M17 30h5" />
+          <path d="M32 25h2" />
+          <path d="M32 32h2" />
+        </svg>
+      );
+    case "chat":
+      return (
+        <svg {...common}>
+          <path d="M9 12h30v20H20l-8 6v-6H9z" />
+          <path d="M17 21h14" />
+          <path d="M17 27h9" />
         </svg>
       );
     case "x":
