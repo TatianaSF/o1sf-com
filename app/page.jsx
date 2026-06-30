@@ -12,16 +12,21 @@ export default function HomePage() {
   return (
     <div className="app-stage">
       <main className="phone-page" aria-label="O1SF landing page">
-        {sections.map((section) => (
-          <LandingSection key={section.slug} section={section} />
+        {sections.map((section, index) => (
+          <LandingSection
+            key={section.slug}
+            section={section}
+            nextHref={getSectionHref(sections[index + 1])}
+          />
         ))}
       </main>
     </div>
   );
 }
 
-function LandingSection({ section }) {
+function LandingSection({ section, nextHref }) {
   const anchor = section.anchor || section.slug;
+  const readMoreHref = nextHref || section.ctaHref;
 
   if (section.kind === "hero") {
     return (
@@ -39,7 +44,7 @@ function LandingSection({ section }) {
             ))}
           </p>
           <ParagraphStack paragraphs={section.paragraphs} />
-          <CTAButton href={section.ctaHref || "#reality"}>{section.ctaLabel || "Read more"}</CTAButton>
+          <ReadMoreButton href={readMoreHref || "#reality"} />
         </div>
       </MobileSection>
     );
@@ -57,6 +62,7 @@ function LandingSection({ section }) {
             ))}
           </div>
           <p className="closing-line">{section.close}</p>
+          <ReadMoreButton href={readMoreHref} />
         </div>
       </MobileSection>
     );
@@ -83,6 +89,7 @@ function LandingSection({ section }) {
               </div>
             ))}
           </div>
+          <ReadMoreButton href={readMoreHref} />
         </div>
       </MobileSection>
     );
@@ -98,6 +105,7 @@ function LandingSection({ section }) {
               <StatBlock key={stat.number} {...stat} />
             ))}
           </div>
+          <ReadMoreButton href={readMoreHref} />
         </div>
       </MobileSection>
     );
@@ -118,6 +126,7 @@ function LandingSection({ section }) {
               <IconCard key={moment.title} icon={moment.icon} title={moment.title} variant="moment" />
             ))}
           </div>
+          <ReadMoreButton href={readMoreHref} />
         </div>
       </MobileSection>
     );
@@ -149,6 +158,10 @@ function LandingSection({ section }) {
   return null;
 }
 
+function ReadMoreButton({ href }) {
+  return href ? <CTAButton href={href}>Read more</CTAButton> : null;
+}
+
 function ParagraphStack({ paragraphs }) {
   return (
     <div className="copy-stack">
@@ -157,6 +170,14 @@ function ParagraphStack({ paragraphs }) {
       ))}
     </div>
   );
+}
+
+function getSectionHref(section) {
+  if (!section) {
+    return undefined;
+  }
+
+  return `#${section.anchor || section.slug}`;
 }
 
 function renderInlineMarkdown(text) {
