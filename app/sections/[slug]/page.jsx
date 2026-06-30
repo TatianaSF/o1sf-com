@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MarkdownBody } from "../../../components/MarkdownBody";
+import { TatianaText } from "../../../components/TatianaText";
 import { getCollection, getItem } from "../../../lib/content";
 import { buildPageMetadata, buildSectionJsonLd, serializeJsonLd } from "../../../lib/seo";
 
@@ -51,7 +52,9 @@ export default async function SectionPage({ params }) {
           </Link>
           <p className="content-kicker">{section.eyebrow || String(section.order).padStart(2, "0")}</p>
           <h1>{section.title}</h1>
-          <p>{section.description}</p>
+          <p>
+            <TatianaText text={section.description} />
+          </p>
         </header>
         <article className="markdown-shell glass-card">
           <MarkdownBody body={section.body} />

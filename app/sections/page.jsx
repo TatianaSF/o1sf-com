@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { TatianaText } from "../../components/TatianaText";
 import { getCollection } from "../../lib/content";
 import { buildPageMetadata } from "../../lib/seo";
 
@@ -21,15 +22,21 @@ export default function SectionsIndexPage() {
           O1SF
         </Link>
         <h1>Sections</h1>
-        <p>Public content blocks for the O1SF landing page by TatianaSF.</p>
+        <p>
+          <TatianaText text="Public content blocks for the O1SF landing page by TatianaSF." />
+        </p>
       </header>
       <div className="content-grid">
         {sections.map((section) => (
-          <Link className="content-card" key={section.slug} href={`/sections/${section.slug}`}>
-            <span>{section.eyebrow || String(section.order).padStart(2, "0")}</span>
-            <h2>{section.title}</h2>
-            <p>{section.description}</p>
-          </Link>
+          <article className="content-card" key={section.slug}>
+            <Link className="content-card-link" href={`/sections/${section.slug}`} prefetch={false}>
+              <span>{section.eyebrow || String(section.order).padStart(2, "0")}</span>
+              <h2>{section.title}</h2>
+            </Link>
+            <p>
+              <TatianaText text={section.description} />
+            </p>
+          </article>
         ))}
       </div>
     </main>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { TatianaText } from "./TatianaText";
+
 export function MarkdownBody({ body }) {
   const blocks = toBlocks(body);
 
@@ -108,6 +110,6 @@ function renderInline(text) {
       );
     }
 
-    return token;
+    return <TatianaText key={index} text={token} />;
   });
 }

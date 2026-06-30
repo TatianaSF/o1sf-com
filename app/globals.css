@@ -218,6 +218,7 @@ p {
 .button,
 .site-signature-logo-link,
 .content-home-link,
+.content-card-link,
 .content-card,
 .cta-button,
 .footer-links a {
@@ -322,7 +323,7 @@ p {
 .tatiana-link {
   color: #153d6f;
   font: inherit;
-  font-weight: inherit;
+  font-weight: 850;
   text-decoration-color: currentColor;
   text-decoration-line: underline;
   text-decoration-thickness: 0.08em;
@@ -826,8 +827,14 @@ h1 span,
 .content-card {
   display: grid;
   gap: 10px;
+  align-content: start;
   min-height: 180px;
   padding: 22px;
+}
+
+.content-card-link {
+  display: grid;
+  gap: 10px;
 }
 
 .content-card span {
