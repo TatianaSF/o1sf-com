@@ -1,0 +1,24 @@
+{
+  "name": "Codex SF",
+  "short_name": "CodexSF",
+  "description": "Open-source community hub for San Francisco builders, hackathons, and practical Codex workflows.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#101114",
+  "icons": [
+    {
+      "src": "/icon.png?v=4",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png?v=4",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

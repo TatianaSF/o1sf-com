@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.next/
+out/
+.playwright-mcp/
+*.log
+.env
+.env.*
+!.env.example
+design/*-viewport.png
+design/*-fullpage.png
