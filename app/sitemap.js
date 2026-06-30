@@ -4,13 +4,21 @@ import { siteConfig } from "../lib/seo";
 export const dynamic = "force-static";
 
 export default function sitemap() {
-  const staticRoutes = ["", "/sections"];
-  const sectionRoutes = getCollection("sections").map((section) => `/sections/${section.slug}`);
+  const now = new Date();
+  const staticRoutes = [
+    { path: "", changeFrequency: "weekly", priority: 1 },
+    { path: "/sections", changeFrequency: "monthly", priority: 0.8 },
+  ];
+  const sectionRoutes = getCollection("sections").map((section) => ({
+    path: `/sections/${section.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
-  return [...staticRoutes, ...sectionRoutes].map((path) => ({
-    url: `${siteConfig.url}${path}`,
-    lastModified: new Date(),
-    changeFrequency: path === "" ? "monthly" : "yearly",
-    priority: path === "" ? 1 : 0.7,
+  return [...staticRoutes, ...sectionRoutes].map((route) => ({
+    url: `${siteConfig.url}${route.path}`,
+    lastModified: now,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
   }));
 }

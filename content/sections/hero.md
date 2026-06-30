@@ -1,6 +1,6 @@
 ---
 title: Hero
-description: Opening position for the O1SF landing page.
+description: O1SF by TatianaSF on visibility, context, speaking, judging, mentoring, and how high-trust rooms work in San Francisco.
 order: 1
 status: Public
 kind: hero

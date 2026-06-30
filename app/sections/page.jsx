@@ -4,9 +4,11 @@ import { getCollection } from "../../lib/content";
 import { buildPageMetadata } from "../../lib/seo";
 
 export const metadata = buildPageMetadata({
-  title: "Sections",
-  description: "All public O1SF landing sections stored as Markdown content.",
+  title: "O1SF Sections",
+  description:
+    "Read the public O1SF sections by TatianaSF about visibility, context, speaking, mentoring, panels, and high-trust rooms in San Francisco.",
   path: "/sections",
+  type: "website",
 });
 
 export default function SectionsIndexPage() {
@@ -19,7 +21,7 @@ export default function SectionsIndexPage() {
           O1SF
         </Link>
         <h1>Sections</h1>
-        <p>Public content blocks for the O1SF landing page.</p>
+        <p>Public content blocks for the O1SF landing page by TatianaSF.</p>
       </header>
       <div className="content-grid">
         {sections.map((section) => (

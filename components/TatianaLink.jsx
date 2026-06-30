@@ -1,4 +1,4 @@
-export const TATIANA_SEARCH_URL = "https://www.google.com/search?q=TatianaSF";
+import { TATIANA_URL } from "../lib/seo";
 
 export function TatianaLink({ className }) {
   const classes = ["tatiana-link", className].filter(Boolean).join(" ");
@@ -6,7 +6,7 @@ export function TatianaLink({ className }) {
   return (
     <a
       className={classes}
-      href={TATIANA_SEARCH_URL}
+      href={TATIANA_URL}
       rel="noopener noreferrer"
       target="_blank"
     >

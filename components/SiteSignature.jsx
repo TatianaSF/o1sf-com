@@ -65,7 +65,7 @@ export function SiteSignature({
     <div className={classes} aria-label={label}>
       <Link className="site-signature-logo-link" href="/" aria-label="O1SF home">
         <Image
-          alt="CodexSF"
+          alt="CodexSF logo for O1SF by TatianaSF"
           className="site-signature-logo"
           height="48"
           src="/codexsf-logo.png"

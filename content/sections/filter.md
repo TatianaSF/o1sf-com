@@ -1,6 +1,6 @@
 ---
 title: The Filter
-description: The standard for deciding what belongs in front of the room.
+description: The O1SF standard by TatianaSF for deciding what is worth placing in front of a high-trust room.
 order: 5
 status: Public
 kind: moments

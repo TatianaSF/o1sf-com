@@ -1,6 +1,6 @@
 ---
 title: Experience
-description: The scale of meetings, hiring, and interviews behind the filter.
+description: TatianaSF experience across 100+ meetings, 1,000+ hires, and 10,000+ interviews behind the O1SF filter.
 order: 4
 status: Public
 kind: stats

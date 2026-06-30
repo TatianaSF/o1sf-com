@@ -1,6 +1,6 @@
 ---
 title: The Outcome
-description: The intended result when alignment is real.
+description: The O1SF outcome: the right people, context, and timing for meaningful rooms with TatianaSF.
 order: 6
 status: Public
 kind: outcome

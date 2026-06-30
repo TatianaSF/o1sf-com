@@ -1,6 +1,6 @@
 ---
 title: The Other Side
-description: The alignment question behind every request for the room.
+description: How O1SF by TatianaSF evaluates alignment before placing someone in the right professional room.
 order: 3
 status: Public
 kind: filter-list

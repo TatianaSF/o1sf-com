@@ -3,7 +3,7 @@ import "./globals.css";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 
 import { SiteChrome } from "../components/SiteChrome";
-import { siteConfig } from "../lib/seo";
+import { buildRobotsMetadata, siteConfig } from "../lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,11 +21,20 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
+  authors: [{ name: siteConfig.author.name, url: siteConfig.author.url }],
+  creator: siteConfig.author.name,
+  publisher: siteConfig.author.name,
+  category: siteConfig.category,
+  keywords: siteConfig.keywords,
+  alternates: {
+    canonical: "/",
+  },
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -38,20 +47,21 @@ export const metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
-    title: siteConfig.name,
+    title: siteConfig.title,
     description: siteConfig.description,
     url: siteConfig.url,
-    siteName: siteConfig.name,
-    images: [{ url: "/assets/sf-bay-skyline.png", width: 1200, height: 630 }],
-    locale: "en_US",
+    siteName: siteConfig.shortName,
+    images: [siteConfig.ogImage],
+    locale: siteConfig.locale,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: siteConfig.title,
     description: siteConfig.description,
-    images: ["/assets/sf-bay-skyline.png"],
+    images: [siteConfig.ogImage.url],
   },
+  robots: buildRobotsMetadata(),
 };
 
 export default function RootLayout({ children }) {

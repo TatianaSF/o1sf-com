@@ -5,22 +5,30 @@ import { MobileSection } from "../components/MobileSection";
 import { SectionHeader } from "../components/SectionHeader";
 import { StatBlock } from "../components/StatBlock";
 import { getCollection } from "../lib/content";
+import { buildHomeJsonLd, serializeJsonLd } from "../lib/seo";
 
 export default function HomePage() {
   const sections = getCollection("sections");
+  const jsonLd = buildHomeJsonLd();
 
   return (
-    <div className="app-stage">
-      <main className="phone-page" aria-label="O1SF landing page">
-        {sections.map((section, index) => (
-          <LandingSection
-            key={section.slug}
-            section={section}
-            nextHref={getSectionHref(sections[index + 1])}
-          />
-        ))}
-      </main>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
+      />
+      <div className="app-stage">
+        <main className="phone-page" aria-label="O1SF landing page by TatianaSF">
+          {sections.map((section, index) => (
+            <LandingSection
+              key={section.slug}
+              section={section}
+              nextHref={getSectionHref(sections[index + 1])}
+            />
+          ))}
+        </main>
+      </div>
+    </>
   );
 }
 

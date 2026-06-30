@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { MarkdownBody } from "../../../components/MarkdownBody";
 import { getCollection, getItem } from "../../../lib/content";
-import { buildPageMetadata } from "../../../lib/seo";
+import { buildPageMetadata, buildSectionJsonLd, serializeJsonLd } from "../../../lib/seo";
 
 export const dynamicParams = false;
 
@@ -36,19 +36,27 @@ export default async function SectionPage({ params }) {
     notFound();
   }
 
+  const jsonLd = buildSectionJsonLd(section);
+
   return (
-    <main className="content-page">
-      <header className="content-hero">
-        <Link className="content-home-link" href="/">
-          O1SF
-        </Link>
-        <p className="content-kicker">{section.eyebrow || String(section.order).padStart(2, "0")}</p>
-        <h1>{section.title}</h1>
-        <p>{section.description}</p>
-      </header>
-      <article className="markdown-shell glass-card">
-        <MarkdownBody body={section.body} />
-      </article>
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
+      />
+      <main className="content-page">
+        <header className="content-hero">
+          <Link className="content-home-link" href="/">
+            O1SF
+          </Link>
+          <p className="content-kicker">{section.eyebrow || String(section.order).padStart(2, "0")}</p>
+          <h1>{section.title}</h1>
+          <p>{section.description}</p>
+        </header>
+        <article className="markdown-shell glass-card">
+          <MarkdownBody body={section.body} />
+        </article>
+      </main>
+    </>
   );
 }

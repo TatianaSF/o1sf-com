@@ -1,6 +1,6 @@
 ---
 title: The Reality
-description: Why giving back usually carries a deeper public signal.
+description: TatianaSF on why giving back, speaking, judging, and mentoring often carry a deeper public signal.
 order: 2
 status: Public
 kind: signals
