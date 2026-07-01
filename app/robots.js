@@ -1,13 +1,19 @@
-import { siteConfig } from "../lib/seo";
+import { aiCrawlerUserAgents, siteConfig } from "../lib/seo";
 
 export const dynamic = "force-static";
 
 export default function robots() {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
+    rules: [
+      ...aiCrawlerUserAgents.map((userAgent) => ({
+        userAgent,
+        allow: "/",
+      })),
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+    ],
     sitemap: `${siteConfig.url}/sitemap.xml`,
   };
 }

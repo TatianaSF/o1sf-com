@@ -3,7 +3,7 @@ import "./globals.css";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 
 import { SiteChrome } from "../components/SiteChrome";
-import { buildRobotsMetadata, siteConfig } from "../lib/seo";
+import { aiFeedPaths, buildRobotsMetadata, siteConfig } from "../lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,6 +34,13 @@ export const metadata = {
   keywords: siteConfig.keywords,
   alternates: {
     canonical: "/",
+    types: {
+      "application/json": [
+        { url: aiFeedPaths.profile, title: "O1SF machine-readable profile" },
+        { url: aiFeedPaths.sections, title: "O1SF section feed" },
+      ],
+      "text/plain": [{ url: aiFeedPaths.llms, title: "O1SF LLM summary" }],
+    },
   },
   manifest: "/manifest.webmanifest",
   icons: {
