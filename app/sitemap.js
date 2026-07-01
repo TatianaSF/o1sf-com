@@ -7,6 +7,7 @@ export default function sitemap() {
   const now = new Date();
   const staticRoutes = [
     { path: "", changeFrequency: "weekly", priority: 1 },
+    { path: siteConfig.entityPath, changeFrequency: "weekly", priority: 0.9 },
     { path: "/sections", changeFrequency: "monthly", priority: 0.8 },
     { path: aiFeedPaths.profile, changeFrequency: "weekly", priority: 0.8 },
     { path: aiFeedPaths.sections, changeFrequency: "weekly", priority: 0.8 },

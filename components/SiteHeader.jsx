@@ -12,6 +12,7 @@ const navItems = [
   ["Experience", "/#experience"],
   ["Filter", "/#filter"],
   ["Outcome", "/#outcome"],
+  ["TatianaSF", "/tatianasf"],
   ["Sections", "/sections"],
 ];
 
