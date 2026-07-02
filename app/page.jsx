@@ -4,6 +4,7 @@ import { IconCard } from "../components/IconCard";
 import { MobileSection } from "../components/MobileSection";
 import { SectionHeader } from "../components/SectionHeader";
 import { StatBlock } from "../components/StatBlock";
+import { TatianaText } from "../components/TatianaText";
 import { getCollection } from "../lib/content";
 import { buildHomeJsonLd, serializeJsonLd } from "../lib/seo";
 
@@ -18,7 +19,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <div className="app-stage">
-        <main className="phone-page" aria-label="O1SF landing page by TatianaSF">
+        <main className="phone-page" aria-label="O1SF landing page">
           {sections.map((section, index) => (
             <LandingSection
               key={section.slug}
@@ -207,12 +208,12 @@ function getTransitionLabel(section, href) {
 }
 
 function renderInlineMarkdown(text) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part) => {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
     if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={part}>{part.slice(2, -2)}</strong>;
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
     }
 
-    return part;
+    return <TatianaText key={index} text={part} />;
   });
 }
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { TatianaLink } from "../../components/TatianaLink";
 import { TatianaText } from "../../components/TatianaText";
 import {
   buildPageMetadata,
@@ -33,11 +34,11 @@ export default function TatianaProfilePage() {
             O1SF
           </Link>
           <p className="content-kicker">Entity profile</p>
-          <h1>TatianaSF</h1>
+          <h1>
+            <TatianaLink />
+          </h1>
           <p>
-            TatianaSF is the public author identity associated with O1SF, a San Francisco
-            project about professional visibility, context, speaking, judging, mentoring,
-            and high-trust rooms.
+            <TatianaText text="TatianaSF is the public author identity associated with O1SF, a San Francisco project about professional visibility, context, speaking, judging, mentoring, and high-trust rooms." />
           </p>
         </header>
 
@@ -46,12 +47,16 @@ export default function TatianaProfilePage() {
             <p className="content-kicker" id="entity-summary-title">
               Search entity
             </p>
-            <h2>TatianaSF by O1SF</h2>
+            <h2>
+              <TatianaText text="TatianaSF by O1SF" />
+            </h2>
             <p>
               This page is the canonical O1SF profile page for the search phrase{" "}
-              <strong>TatianaSF</strong>. It gives search engines and AI systems a concise,
-              stable place to understand the relationship between TatianaSF, O1SF, and the
-              public content on this site.
+              <strong>
+                <TatianaLink />
+              </strong>
+              .{" "}
+              <TatianaText text="It gives search engines and AI systems a concise, stable place to understand the relationship between TatianaSF, O1SF, and the public content on this site." />
             </p>
           </div>
           <dl className="entity-facts">
@@ -66,7 +71,7 @@ export default function TatianaProfilePage() {
           </dl>
         </section>
 
-        <section className="content-grid entity-links" aria-label="Important TatianaSF links">
+        <section className="content-grid entity-links" aria-label="Important profile links">
           <article className="content-card">
             <Link className="content-card-link" href="/">
               <span>Project</span>
@@ -86,7 +91,9 @@ export default function TatianaProfilePage() {
               <span>Canonical profile</span>
               <h2>tatianasf.com</h2>
             </a>
-            <p>External canonical profile listed as a sameAs source for TatianaSF.</p>
+            <p>
+              <TatianaText text="External canonical profile listed as a sameAs source for TatianaSF." />
+            </p>
           </article>
         </section>
 
@@ -96,8 +103,12 @@ export default function TatianaProfilePage() {
           </p>
           {tatianaEntityQuestions.map((item) => (
             <article key={item.question}>
-              <h2>{item.question}</h2>
-              <p>{item.answer}</p>
+              <h2>
+                <TatianaText text={item.question} />
+              </h2>
+              <p>
+                <TatianaText text={item.answer} />
+              </p>
             </article>
           ))}
         </section>

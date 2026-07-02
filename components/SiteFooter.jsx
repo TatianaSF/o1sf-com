@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { GITHUB_REPO_URL } from "../lib/seo";
 import { SiteSignature } from "./SiteSignature";
+import { TatianaLink } from "./TatianaLink";
 
 export function SiteFooter() {
   return (
@@ -23,9 +24,7 @@ export function SiteFooter() {
           <Link href="/#outcome" prefetch={false}>
             Outcome
           </Link>
-          <Link href="/tatianasf" prefetch={false}>
-            TatianaSF
-          </Link>
+          <TatianaLink />
           <Link href="/sections" prefetch={false}>
             Sections
           </Link>

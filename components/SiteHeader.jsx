@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { TATIANA_SEARCH_URL } from "../lib/seo";
 import { SiteSignature } from "./SiteSignature";
 
 const navItems = [
-  ["Frame", "/#hero"],
-  ["Standard", "/#other-side"],
-  ["Filter", "/#filter"],
-  ["TatianaSF", "/tatianasf"],
+  { label: "Frame", href: "/#hero" },
+  { label: "Standard", href: "/#other-side" },
+  { label: "Filter", href: "/#filter" },
+  { label: "TatianaSF", href: TATIANA_SEARCH_URL, external: true },
 ];
 
 function MenuIcon({ open }) {
@@ -54,6 +55,21 @@ export function SiteHeader() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+  const renderNavLink = ({ label, href, external }) => {
+    if (external) {
+      return (
+        <a key={href} href={href} rel="noopener noreferrer" target="_blank" onClick={closeMenu}>
+          {label}
+        </a>
+      );
+    }
+
+    return (
+      <Link key={href} href={href} prefetch={false} onClick={closeMenu}>
+        {label}
+      </Link>
+    );
+  };
 
   return (
     <header className="site-header">
@@ -76,11 +92,7 @@ export function SiteHeader() {
           </button>
         </div>
         <nav className="nav-links desktop-nav" aria-label="Main menu">
-          {navItems.map(([label, href]) => (
-            <Link key={href} href={href} prefetch={false}>
-              {label}
-            </Link>
-          ))}
+          {navItems.map(renderNavLink)}
         </nav>
         <Link className="nav-cta" href="/sections" prefetch={false}>
           Archive
@@ -94,16 +106,7 @@ export function SiteHeader() {
           {menuOpen ? (
             <>
               <nav className="mobile-nav-links" aria-label="Mobile main menu">
-                {navItems.map(([label, href]) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    prefetch={false}
-                    onClick={closeMenu}
-                  >
-                    {label}
-                  </Link>
-                ))}
+                {navItems.map(renderNavLink)}
               </nav>
               <Link
                 className="button primary mobile-menu-cta"
