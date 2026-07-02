@@ -24,6 +24,7 @@ export default function HomePage() {
               key={section.slug}
               section={section}
               nextHref={getSectionHref(sections[index + 1])}
+              progress={`${index + 1}/${sections.length}`}
             />
           ))}
         </main>
@@ -32,13 +33,14 @@ export default function HomePage() {
   );
 }
 
-function LandingSection({ section, nextHref }) {
+function LandingSection({ section, nextHref, progress }) {
   const anchor = section.anchor || section.slug;
   const readMoreHref = nextHref || section.ctaHref;
+  const transitionLabel = getTransitionLabel(section, readMoreHref);
 
   if (section.kind === "hero") {
     return (
-      <MobileSection id={anchor} className="hero-section" ariaLabel="O1SF hero">
+      <MobileSection id={anchor} className="hero-section" ariaLabel="O1SF hero" progress={progress}>
         <div className="hero-card glass-card">
           <h1>
             {splitField(section.headline).map((line) => (
@@ -52,7 +54,7 @@ function LandingSection({ section, nextHref }) {
             ))}
           </p>
           <ParagraphStack paragraphs={section.paragraphs} />
-          <ReadMoreButton href={readMoreHref || "#reality"} />
+          <ReadMoreButton href={readMoreHref || "#reality"} label={transitionLabel} />
         </div>
       </MobileSection>
     );
@@ -60,7 +62,7 @@ function LandingSection({ section, nextHref }) {
 
   if (section.kind === "signals") {
     return (
-      <MobileSection id={anchor} className="reality-section" ariaLabel={section.title}>
+      <MobileSection id={anchor} className="reality-section" ariaLabel={section.title} progress={progress}>
         <div className="section-card glass-card">
           <SectionHeader eyebrow={section.eyebrow} title={section.title} />
           <ParagraphStack paragraphs={section.paragraphs} />
@@ -70,7 +72,7 @@ function LandingSection({ section, nextHref }) {
             ))}
           </div>
           <p className="closing-line">{section.close}</p>
-          <ReadMoreButton href={readMoreHref} />
+          <ReadMoreButton href={readMoreHref} label={transitionLabel} />
         </div>
       </MobileSection>
     );
@@ -81,7 +83,7 @@ function LandingSection({ section, nextHref }) {
     const cards = [section.main, ...section.paragraphs].filter(Boolean);
 
     return (
-      <MobileSection id={anchor} className="other-side-section" ariaLabel={section.title}>
+      <MobileSection id={anchor} className="other-side-section" ariaLabel={section.title} progress={progress}>
         <div className="section-card glass-card">
           <SectionHeader eyebrow={section.eyebrow} title={section.title} />
           <h2 className="statement-heading">
@@ -97,7 +99,7 @@ function LandingSection({ section, nextHref }) {
               </div>
             ))}
           </div>
-          <ReadMoreButton href={readMoreHref} />
+          <ReadMoreButton href={readMoreHref} label={transitionLabel} />
         </div>
       </MobileSection>
     );
@@ -105,15 +107,16 @@ function LandingSection({ section, nextHref }) {
 
   if (section.kind === "stats") {
     return (
-      <MobileSection id={anchor} className="experience-section" ariaLabel={section.title}>
+      <MobileSection id={anchor} className="experience-section" ariaLabel={section.title} progress={progress}>
         <div className="section-card stats-card glass-card">
           <SectionHeader eyebrow={section.eyebrow} title={section.title} align="center" />
+          <ParagraphStack paragraphs={section.paragraphs} className="experience-note" />
           <div className="stats-list">
             {parseStats(section.items).map((stat) => (
               <StatBlock key={stat.number} {...stat} />
             ))}
           </div>
-          <ReadMoreButton href={readMoreHref} />
+          <ReadMoreButton href={readMoreHref} label={transitionLabel} />
         </div>
       </MobileSection>
     );
@@ -126,7 +129,7 @@ function LandingSection({ section, nextHref }) {
     }));
 
     return (
-      <MobileSection id={anchor} className="filter-section" ariaLabel={section.title}>
+      <MobileSection id={anchor} className="filter-section" ariaLabel={section.title} progress={progress}>
         <div className="section-card glass-card">
           <SectionHeader eyebrow={section.eyebrow} title={section.title} align="center" />
           <div className="moment-stack">
@@ -134,7 +137,7 @@ function LandingSection({ section, nextHref }) {
               <IconCard key={moment.title} icon={moment.icon} title={moment.title} variant="moment" />
             ))}
           </div>
-          <ReadMoreButton href={readMoreHref} />
+          <ReadMoreButton href={readMoreHref} label={transitionLabel} />
         </div>
       </MobileSection>
     );
@@ -142,7 +145,7 @@ function LandingSection({ section, nextHref }) {
 
   if (section.kind === "outcome") {
     return (
-      <MobileSection id={anchor} className="outcome-section" ariaLabel={section.title}>
+      <MobileSection id={anchor} className="outcome-section" ariaLabel={section.title} progress={progress}>
         <div className="section-card outcome-card glass-card">
           <SectionHeader eyebrow={section.eyebrow} title={section.title} align="center" />
           <Icon name="peopleSignal" className="outcome-icon" />
@@ -166,13 +169,15 @@ function LandingSection({ section, nextHref }) {
   return null;
 }
 
-function ReadMoreButton({ href }) {
-  return href ? <CTAButton href={href}>Read more</CTAButton> : null;
+function ReadMoreButton({ href, label }) {
+  return href ? <CTAButton href={href}>{label || "Continue"}</CTAButton> : null;
 }
 
-function ParagraphStack({ paragraphs }) {
+function ParagraphStack({ paragraphs, className }) {
+  const classes = ["copy-stack", className].filter(Boolean).join(" ");
+
   return (
-    <div className="copy-stack">
+    <div className={classes}>
       {paragraphs.map((paragraph) => (
         <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>
       ))}
@@ -186,6 +191,19 @@ function getSectionHref(section) {
   }
 
   return `#${section.anchor || section.slug}`;
+}
+
+function getTransitionLabel(section, href) {
+  const anchor = href?.replace(/^#/, "");
+  const labels = {
+    reality: "Start with the reality",
+    "other-side": "See the standard",
+    experience: "Show the judgment",
+    filter: "Read the filter",
+    outcome: "See the outcome",
+  };
+
+  return labels[anchor] || section.ctaLabel || "Continue";
 }
 
 function renderInlineMarkdown(text) {

@@ -54,12 +54,13 @@ export function SiteSignature({
   className,
   showBuiltWithStack = false,
   showMadeWith = true,
+  showProvenance = true,
 }) {
   const classes = ["site-signature", className].filter(Boolean).join(" ");
   const label =
-    showMadeWith || showBuiltWithStack
+    showProvenance && (showMadeWith || showBuiltWithStack)
       ? "O1SF built with OpenAI Codex by TatianaSF"
-      : "O1SF OpenAI Codex by TatianaSF";
+      : "O1SF by TatianaSF";
 
   return (
     <div className={classes} aria-label={label}>
@@ -74,18 +75,22 @@ export function SiteSignature({
         />
         <span className="site-signature-brand">O1SF</span>
       </Link>
-      {showMadeWith ? <span>Made with</span> : null}
-      {showBuiltWithStack ? (
+      {showProvenance && showMadeWith ? <span>Made with</span> : null}
+      {showProvenance && showBuiltWithStack ? (
         <span className="signature-built-with">
           <span>Built</span>
           <span>with</span>
         </span>
       ) : null}
-      <OpenAIIcon />
-      <strong>OpenAI</strong>
-      <span className="signature-separator" aria-hidden="true" />
-      <CodexIcon />
-      <strong>Codex</strong>
+      {showProvenance ? (
+        <>
+          <OpenAIIcon />
+          <strong>OpenAI</strong>
+          <span className="signature-separator" aria-hidden="true" />
+          <CodexIcon />
+          <strong>Codex</strong>
+        </>
+      ) : null}
       <span>by</span>
       <TatianaLink />
     </div>

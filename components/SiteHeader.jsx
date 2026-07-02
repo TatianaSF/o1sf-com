@@ -6,14 +6,10 @@ import { useEffect, useState } from "react";
 import { SiteSignature } from "./SiteSignature";
 
 const navItems = [
-  ["Home", "/#hero"],
-  ["Reality", "/#reality"],
-  ["Other Side", "/#other-side"],
-  ["Experience", "/#experience"],
+  ["Frame", "/#hero"],
+  ["Standard", "/#other-side"],
   ["Filter", "/#filter"],
-  ["Outcome", "/#outcome"],
   ["TatianaSF", "/tatianasf"],
-  ["Sections", "/sections"],
 ];
 
 function MenuIcon({ open }) {
@@ -65,8 +61,8 @@ export function SiteHeader() {
         <div className="nav-primary-row">
           <SiteSignature
             className="header-signature"
-            showBuiltWithStack
             showMadeWith={false}
+            showProvenance={false}
           />
           <button
             aria-controls="mobile-menu"
@@ -87,31 +83,38 @@ export function SiteHeader() {
           ))}
         </nav>
         <Link className="nav-cta" href="/sections" prefetch={false}>
-          View Sections
+          Archive
         </Link>
-        <div className="mobile-menu" id="mobile-menu" aria-hidden={!menuOpen}>
-          <nav className="mobile-nav-links" aria-label="Mobile main menu">
-            {navItems.map(([label, href]) => (
+        <div
+          className="mobile-menu"
+          id="mobile-menu"
+          aria-hidden={!menuOpen}
+          inert={!menuOpen}
+        >
+          {menuOpen ? (
+            <>
+              <nav className="mobile-nav-links" aria-label="Mobile main menu">
+                {navItems.map(([label, href]) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    prefetch={false}
+                    onClick={closeMenu}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </nav>
               <Link
-                key={href}
-                href={href}
+                className="button primary mobile-menu-cta"
+                href="/sections"
                 prefetch={false}
-                tabIndex={menuOpen ? 0 : -1}
                 onClick={closeMenu}
               >
-                {label}
+                Open Archive
               </Link>
-            ))}
-          </nav>
-          <Link
-            className="button primary mobile-menu-cta"
-            href="/sections"
-            prefetch={false}
-            tabIndex={menuOpen ? 0 : -1}
-            onClick={closeMenu}
-          >
-            View Sections
-          </Link>
+            </>
+          ) : null}
         </div>
       </div>
     </header>

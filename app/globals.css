@@ -19,6 +19,7 @@
   --max: 1160px;
   --panel: #f6f8fb;
   --blue: #246bfe;
+  --signature-green: #0d7f4e;
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 16px;
@@ -182,17 +183,15 @@ p {
 
 .nav-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas:
-    "primary cta"
-    "nav nav";
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "primary nav cta";
   align-items: center;
   justify-content: space-between;
-  gap: 10px 18px;
+  gap: 18px;
   width: min(100% - 32px, var(--max));
-  min-height: 86px;
+  min-height: 64px;
   margin: 0 auto;
-  padding: 10px 0 12px;
+  padding: 8px 0;
 }
 
 .nav-primary-row {
@@ -206,8 +205,9 @@ p {
 .nav-links {
   grid-area: nav;
   display: flex;
-  gap: 16px;
+  gap: 18px;
   align-items: center;
+  justify-content: flex-end;
   color: #252a33;
   font-size: 0.88rem;
   font-weight: 650;
@@ -237,16 +237,16 @@ p {
 .site-signature {
   display: inline-flex;
   flex: 0 0 auto;
-  gap: 8px;
+  gap: 7px;
   align-items: center;
-  min-height: 38px;
-  padding: 0 11px;
+  min-height: 36px;
+  padding: 0 10px;
   overflow: visible;
   color: #3d4653;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 720;
   white-space: nowrap;
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.68);
   border: 1px solid rgba(16, 17, 20, 0.12);
   border-radius: 8px;
   box-shadow: 0 1px 0 rgba(16, 17, 20, 0.05);
@@ -266,14 +266,14 @@ p {
 }
 
 .site-signature-mark {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
 .site-signature-brand {
   color: #14172b;
-  font-size: 1rem;
+  font-size: 0.96rem;
   font-weight: 850;
   line-height: 1;
   letter-spacing: 0;
@@ -290,7 +290,7 @@ p {
   align-items: center;
   justify-content: center;
   margin-left: -34px;
-  color: #11d879;
+  color: var(--signature-green);
   font-size: 0.76rem;
   font-weight: 850;
   line-height: 0.92;
@@ -377,9 +377,9 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 0 18px;
-  font-size: 0.95rem;
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 0.9rem;
   font-weight: 750;
   border: 1px solid var(--ink);
   border-radius: 8px;
@@ -393,7 +393,7 @@ p {
 .button.primary {
   color: #ffffff;
   background: var(--ink);
-  box-shadow: 0 8px 0 rgba(36, 107, 254, 0.2);
+  box-shadow: 0 5px 0 rgba(36, 107, 254, 0.14);
 }
 
 .nav-cta {
@@ -636,18 +636,23 @@ h1 span,
 }
 
 .stats-card {
-  text-align: center;
+  text-align: left;
 }
 
 .stats-list {
   display: grid;
   gap: 0;
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .stat-block {
   display: grid;
-  gap: 6px;
-  padding: 23px 0 25px;
+  grid-template-columns: minmax(4.8rem, 0.58fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 16px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -656,6 +661,7 @@ h1 span,
 }
 
 .stat-block p {
+  grid-column: 1 / -1;
   font-size: 0.92rem;
   font-weight: 700;
   line-height: 1.35;
@@ -664,9 +670,9 @@ h1 span,
 
 .stat-block strong {
   font-family: var(--font-display);
-  font-size: 4.05rem;
+  font-size: 2.7rem;
   font-weight: 700;
-  line-height: 0.9;
+  line-height: 0.95;
   color: var(--purple);
 }
 
@@ -678,7 +684,7 @@ h1 span,
 }
 
 .filter-section .section-card {
-  text-align: center;
+  text-align: left;
 }
 
 .filter-copy {
@@ -703,13 +709,24 @@ h1 span,
 
 .moment-stack {
   display: grid;
-  gap: 10px;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .icon-card-moment {
   grid-template-columns: auto 1fr;
   min-height: 72px;
+  padding: 14px 0;
   text-align: left;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+}
+
+.icon-card-moment:first-child {
+  border-top: 0;
 }
 
 .icon-card-moment .icon {
@@ -1051,6 +1068,13 @@ h1 span,
   border-radius: 999px;
 }
 
+.phone-progress {
+  color: rgba(20, 23, 43, 0.62);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
 .phone-page .mobile-section {
   flex-direction: column;
   min-height: 100svh;
@@ -1167,8 +1191,8 @@ h1 span,
   color: #ffffff;
   font-size: 0.92rem;
   border-radius: 8px;
-  background: linear-gradient(135deg, #5c32d8, #7a3de3);
-  box-shadow: 0 16px 28px rgba(69, 44, 154, 0.26);
+  background: var(--purple);
+  box-shadow: 0 10px 20px rgba(69, 44, 154, 0.18);
 }
 
 .phone-page .cta-button .icon {
@@ -1250,16 +1274,23 @@ h1 span,
 }
 
 .phone-page .filter-card-list {
-  gap: 10px;
+  gap: 0;
+  border-top: 1px solid rgba(92, 47, 214, 0.14);
+  border-bottom: 1px solid rgba(92, 47, 214, 0.14);
 }
 
 .phone-page .filter-card {
-  min-height: 58px;
-  padding: 11px 14px;
-  background: rgba(255, 255, 255, 0.84);
-  border-color: rgba(68, 54, 142, 0.08);
-  border-radius: 8px;
-  box-shadow: 0 10px 22px rgba(44, 42, 74, 0.08);
+  min-height: 56px;
+  padding: 13px 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(92, 47, 214, 0.14);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.phone-page .filter-card:first-child {
+  border-top: 0;
 }
 
 .phone-page .filter-card .icon {
@@ -1277,33 +1308,56 @@ h1 span,
 }
 
 .phone-page .stats-card {
-  text-align: center;
+  text-align: left;
 }
 
 .phone-page .stats-list {
   gap: 0;
+  width: 100%;
+  margin-top: 18px;
+  border-top-color: rgba(92, 47, 214, 0.16);
+  border-bottom-color: rgba(92, 47, 214, 0.16);
 }
 
 .phone-page .stat-block {
-  gap: 6px;
-  padding: 16px 0 18px;
+  grid-template-columns: minmax(4.4rem, 0.6fr) minmax(0, 1fr);
+  gap: 8px 14px;
+  padding: 15px 0;
   border-top-color: rgba(92, 47, 214, 0.16);
 }
 
 .phone-page .stat-block p,
 .phone-page .stat-block span {
   color: #17172b;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   font-weight: 830;
   line-height: 1.35;
+}
+
+.phone-page .stat-block p {
+  grid-column: 1 / -1;
+  color: #4a4a61;
+  font-size: 0.78rem;
+  font-weight: 760;
 }
 
 .phone-page .stat-block strong {
   color: #6238cf;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 2.95rem;
+  font-size: 2.04rem;
   font-weight: 760;
-  line-height: 0.98;
+  line-height: 1;
+}
+
+.phone-page .experience-note {
+  max-width: 18rem;
+  color: #202337;
+}
+
+.phone-page .experience-note p {
+  font-size: 0.9rem;
+  font-weight: 760;
+  line-height: 1.55;
 }
 
 .phone-page .moment-stack {
@@ -1313,10 +1367,12 @@ h1 span,
 
 .phone-page .icon-card-moment {
   display: grid;
-  justify-items: center;
-  min-height: 124px;
-  padding: 14px 10px 16px;
-  text-align: center;
+  grid-template-columns: 42px 1fr;
+  justify-items: start;
+  align-items: center;
+  min-height: 74px;
+  padding: 14px 0;
+  text-align: left;
   background: transparent;
   border: 0;
   border-top: 1px solid rgba(92, 47, 214, 0.15);
@@ -1328,16 +1384,16 @@ h1 span,
 }
 
 .phone-page .icon-card-moment .icon {
-  width: 48px;
-  height: 48px;
+  width: 30px;
+  height: 30px;
   color: #7b58d1;
   stroke-width: 1.35;
 }
 
 .phone-page .icon-card-moment p {
-  max-width: 15rem;
+  max-width: 15.5rem;
   color: #15172a;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 850;
   line-height: 1.35;
 }

@@ -9,3 +9,5 @@ out/
 !.env.example
 design/*-viewport.png
 design/*-fullpage.png
+
+.vercel
