@@ -1040,6 +1040,13 @@ h1 span,
   text-align: center;
 }
 
+.footer-love {
+  color: #3d4653;
+  font-size: 0.82rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
 .phone-topbar {
   position: relative;
   z-index: 2;
@@ -1603,6 +1610,59 @@ h1 span,
     height: 16px;
   }
 
+  .footer-inner {
+    gap: 3px;
+    width: min(100% - 24px, var(--max));
+    padding: 6px 0 4px;
+    font-size: 0.84rem;
+  }
+
+  .footer-links {
+    gap: 10px 15px;
+    line-height: 1.15;
+  }
+
+  .footer-copy {
+    gap: 5px;
+  }
+
+  .footer-love {
+    font-size: 0.72rem;
+  }
+
+  .phone-page .outcome-section {
+    min-height: calc(100svh - 210px);
+  }
+
+  .phone-page .outcome-section .section-inner {
+    min-height: calc(100svh - 258px);
+  }
+
+  .phone-page .outcome-section .section-card {
+    min-height: calc(100svh - 258px);
+    padding-top: clamp(18px, 2.4svh, 26px);
+    padding-bottom: clamp(18px, 2.8svh, 30px);
+  }
+
+  .phone-page .outcome-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 18px;
+  }
+
+  .phone-page .outcome-opener {
+    margin-bottom: 12px;
+  }
+
+  .phone-page .outcome-heading {
+    margin-bottom: 16px;
+  }
+
+  .phone-page .outcome-rhythm {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+  }
+
   .nav-cta {
     display: none;
   }
@@ -1662,10 +1722,6 @@ h1 span,
   .mobile-menu-cta {
     width: 100%;
     margin-top: 10px;
-  }
-
-  .footer-inner {
-    align-items: flex-start;
   }
 
   .entity-summary {

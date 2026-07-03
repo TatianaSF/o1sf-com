@@ -34,6 +34,7 @@ export function SiteFooter() {
         </div>
         <div className="footer-copy">
           <SiteSignature className="footer-signature" />
+          <p className="footer-love">with love ❤️ from 🌉 San Francisco</p>
         </div>
       </div>
     </footer>
