@@ -11,12 +11,17 @@
     "public-safety": "node scripts/public-safety-scan.mjs"
   },
   "dependencies": {
-    "next": "^16.2.9",
+    "next": "^16.2.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.2.9"
+    "eslint-config-next": "^16.2.10"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.10"
+    }
   }
 }
