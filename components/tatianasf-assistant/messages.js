@@ -1,6 +1,6 @@
 export const messages = {
   en: {
-    profileRole: "Independent Codex Community Ambassador",
+    profileRole: "Codex Community Ambassador",
     profileDescriptor: "Founder • Event Host • Community Builder",
     profileSummary: "Events, partnerships, collaborations and professional opportunities.",
     profileAlt: "TatianaSF ambassador profile",
@@ -43,7 +43,7 @@ export const messages = {
     linkedin: "Open TatianaSF LinkedIn profile",
   },
   ru: {
-    profileRole: "Независимый амбассадор сообщества Codex",
+    profileRole: "Амбассадор сообщества Codex",
     profileDescriptor: "Основатель • Организатор мероприятий • Community Builder",
     profileSummary: "Мероприятия, партнёрства, сотрудничество и профессиональные возможности.",
     profileAlt: "Профиль TatianaSF, амбассадор сообщества",
