@@ -183,8 +183,8 @@ p {
 
 .nav-shell {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  grid-template-areas: "primary nav cta";
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "primary nav";
   align-items: center;
   justify-content: space-between;
   gap: 18px;
@@ -214,7 +214,6 @@ p {
 }
 
 .nav-links a,
-.nav-cta,
 .button,
 .site-signature-logo-link,
 .content-home-link,
@@ -321,6 +320,9 @@ p {
 }
 
 .tatiana-link {
+  display: inline-flex;
+  gap: 0.22em;
+  align-items: baseline;
   color: #153d6f;
   font: inherit;
   font-weight: 850;
@@ -356,7 +358,6 @@ p {
 .mobile-nav-links a:focus-visible,
 .nav-links a:focus-visible,
 .site-signature-logo-link:focus-visible,
-.nav-cta:focus-visible,
 .button:focus-visible,
 .tatiana-link:focus-visible {
   outline: 3px solid rgba(36, 107, 254, 0.26);
@@ -372,7 +373,6 @@ p {
   display: none;
 }
 
-.nav-cta,
 .button {
   display: inline-flex;
   align-items: center;
@@ -389,19 +389,13 @@ p {
     transform 160ms ease;
 }
 
-.nav-cta,
 .button.primary {
   color: #ffffff;
   background: var(--ink);
   box-shadow: 0 5px 0 rgba(36, 107, 254, 0.14);
 }
 
-.nav-cta {
-  grid-area: cta;
-}
-
-.button:hover,
-.nav-cta:hover {
+.button:hover {
   transform: translateY(-2px);
 }
 
@@ -1663,10 +1657,6 @@ h1 span,
     padding: 12px 16px;
   }
 
-  .nav-cta {
-    display: none;
-  }
-
   .mobile-menu {
     grid-area: menu;
     display: grid;
@@ -1684,7 +1674,7 @@ h1 span,
       padding 180ms ease;
   }
 
-  .nav-shell[data-menu-open="true"] .mobile-menu {
+  .mobile-menu.mobile-menu-open {
     max-height: 560px;
     margin-top: 8px;
     padding: 10px;
@@ -1717,11 +1707,6 @@ h1 span,
   .mobile-nav-links a:hover {
     color: var(--blue);
     background: var(--panel);
-  }
-
-  .mobile-menu-cta {
-    width: 100%;
-    margin-top: 10px;
   }
 
   .entity-summary {
@@ -1773,5 +1758,287 @@ h1 span,
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Concept 01 marketing chrome. The program and Ask Document routes keep their
+   own isolated shells; these rules style the public marketing surface. */
+.site-header {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom-color: rgba(16, 17, 20, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.nav-shell {
+  width: min(100% - 48px, 1240px);
+  min-height: 64px;
+  gap: 26px;
+  padding: 8px 0;
+}
+
+.brand-wordmark,
+.footer-wordmark {
+  color: #101114;
+  font-size: 1.08rem;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.brand-wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.nav-links {
+  gap: clamp(15px, 2vw, 26px);
+  color: #384152;
+  font-size: 0.82rem;
+  font-weight: 680;
+}
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: #1663ff;
+  opacity: 0.58;
+  transform: scaleX(1);
+  transform-origin: right;
+  transition:
+    opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-links a:hover {
+  color: #101114;
+}
+
+.nav-links a:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.site-signature-logo-link .site-signature-brand {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08em;
+  text-decoration-color: rgba(22, 99, 255, 0.55);
+  text-underline-offset: 0.18em;
+}
+
+.site-signature-logo-link:hover .site-signature-brand,
+.site-signature-logo-link:focus-visible .site-signature-brand {
+  color: #0b49c8;
+  text-decoration-color: currentColor;
+}
+
+.button.primary {
+  min-height: 44px;
+  color: #ffffff;
+  background: #101114;
+  border-color: #101114;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.button.primary:hover {
+  color: #101114;
+  background: #ffffff;
+}
+
+.marketing-footer {
+  color: #66647a;
+  background: #ffffff;
+  border-top: 1px solid #d9dee7;
+}
+
+.marketing-footer-inner {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  width: min(100% - 48px, 1240px);
+  padding: 28px 0 24px;
+  color: #66647a;
+  font-size: 0.84rem;
+}
+
+.marketing-footer .footer-links {
+  gap: 10px 18px;
+  justify-content: center;
+  color: #66647a;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.marketing-footer .footer-links a {
+  color: #243247;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+.marketing-footer .footer-links a::after {
+  margin-left: 0.32em;
+  color: #1663ff;
+  content: "→";
+}
+
+.marketing-footer .footer-links a:hover {
+  color: #1663ff;
+}
+
+.footer-legal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  justify-content: center;
+  width: min(100%, 760px);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.footer-legal-row details {
+  position: relative;
+}
+
+.footer-legal-row summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 3px 4px;
+  color: #3d4653;
+  font-weight: 700;
+  cursor: pointer;
+  list-style-position: inside;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.footer-legal-row details[open] {
+  flex-basis: 100%;
+}
+
+.footer-legal-row p {
+  max-width: 72ch;
+  margin: 8px auto 0;
+  color: #4e5f75;
+  line-height: 1.55;
+}
+
+.marketing-footer .footer-copy {
+  gap: 6px;
+}
+
+.marketing-footer .footer-signature {
+  color: #3d4653;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.marketing-footer .footer-love {
+  color: #3d4653;
+}
+
+@media (max-width: 960px) {
+  .nav-shell {
+    width: min(100% - 32px, 1240px);
+    min-height: 72px;
+    gap: 0;
+    padding: 8px 0;
+  }
+
+  .brand-wordmark {
+    font-size: 1rem;
+  }
+
+  .site-header .header-signature {
+    flex: 0 1 auto;
+    max-width: calc(100vw - 84px);
+    min-height: 52px;
+    gap: 7px;
+    padding: 0;
+    overflow: visible;
+    color: #3d4653;
+    font-size: 0.9rem;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .site-header .header-signature .site-signature-logo-link {
+    gap: 7px;
+  }
+
+  .site-header .header-signature .site-signature-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .site-header .header-signature .site-signature-brand {
+    font-size: 1.08rem;
+  }
+
+  .mobile-menu-button {
+    color: #101114;
+    background: #ffffff;
+    border-color: rgba(16, 17, 20, 0.18);
+  }
+
+  .mobile-menu.mobile-menu-open {
+    margin-bottom: 8px;
+    border-color: rgba(16, 17, 20, 0.12);
+    box-shadow: 0 6px 8px rgba(16, 17, 20, 0.1);
+  }
+
+  .mobile-nav-links a {
+    color: #384152;
+  }
+
+  .mobile-nav-links a::after {
+    margin-left: auto;
+    color: #1663ff;
+    content: "→";
+    font-size: 1rem;
+  }
+
+  .mobile-nav-links a:hover {
+    color: #101114;
+    background: #f5f7fa;
+  }
+
+  .marketing-footer-inner {
+    gap: 10px;
+    width: min(100% - 32px, 1240px);
+    padding: 18px 0 24px;
+    font-size: 0.8rem;
+  }
+
+  .marketing-footer .footer-links {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .marketing-footer .footer-links {
+    display: flex;
+    width: 100%;
+  }
+
+  .footer-legal-row {
+    gap: 8px 16px;
   }
 }

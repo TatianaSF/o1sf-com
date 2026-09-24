@@ -1,21 +1,18 @@
 import "./globals.css";
 
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
+import Script from "next/script";
 
 import { SiteChrome } from "../components/SiteChrome";
+import { SiteInteractionAnalytics } from "../components/analytics/SiteInteractionAnalytics";
 import { aiFeedPaths, buildRobotsMetadata, siteConfig } from "../lib/seo";
+
+const googleAnalyticsId = "G-ZCBBZM9LM6";
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-inter",
-  display: "swap",
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -31,13 +28,12 @@ export const metadata = {
   creator: siteConfig.author.name,
   publisher: siteConfig.author.name,
   category: siteConfig.category,
-  keywords: siteConfig.keywords,
   alternates: {
     canonical: "/",
     types: {
       "application/json": [
         { url: aiFeedPaths.profile, title: "O1SF machine-readable profile" },
-        { url: aiFeedPaths.sections, title: "O1SF section feed" },
+        { url: aiFeedPaths.pages, title: "O1SF public page feed" },
       ],
       "text/plain": [{ url: aiFeedPaths.llms, title: "O1SF LLM summary" }],
     },
@@ -73,8 +69,22 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${cormorant.variable}`}>
+    <html className={inter.variable} data-scroll-behavior="smooth" lang="en">
+      <head>
+        <Script
+          id="google-analytics-config"
+          strategy="afterInteractive"
+        >
+          {`window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};window.o1sfDirectAnalytics=true;window.gtag('js',new Date());window.gtag('config','${googleAnalyticsId}',{send_page_view:true});`}
+        </Script>
+        <Script
+          id="google-analytics-library"
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+          strategy="lazyOnload"
+        />
+      </head>
+      <body>
+        <SiteInteractionAnalytics />
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>

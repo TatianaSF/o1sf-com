@@ -1,9 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 
 const root = process.cwd();
 const publicRoots = ["app", "components", "content", "lib", "public"];
 const forbiddenFiles = [".env", ".env.local", ".env.production", ".env.development"];
+const forbiddenPublicFileNames = new Set([
+  ...forbiddenFiles,
+  "v1.0_o1sf_us_market_entry_knowledge_base.json",
+]);
 const secretPatterns = [
   /sk-[A-Za-z0-9_-]{20,}/,
   /AIza[0-9A-Za-z_-]{20,}/,
@@ -16,8 +21,8 @@ const contactPattern = /(?:[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\+?\d[\d().\s-]
 const failures = [];
 
 for (const file of forbiddenFiles) {
-  if (fs.existsSync(path.join(root, file))) {
-    failures.push(`Forbidden environment file present: ${file}`);
+  if (fs.existsSync(path.join(root, file)) && !isGitIgnored(file)) {
+    failures.push(`Local environment file is not ignored by git: ${file}`);
   }
 }
 
@@ -30,6 +35,10 @@ for (const publicRoot of publicRoots) {
 
   for (const file of walk(absoluteRoot)) {
     const relativePath = path.relative(root, file);
+
+    if (forbiddenPublicFileNames.has(path.basename(file))) {
+      failures.push(`Forbidden private input in public surface: ${relativePath}`);
+    }
 
     if (privatePathPattern.test(relativePath)) {
       failures.push(`Private-looking path in public surface: ${relativePath}`);
@@ -66,6 +75,14 @@ if (failures.length > 0) {
 }
 
 console.log("Public safety scan passed.");
+
+function isGitIgnored(relativePath) {
+  const result = spawnSync("git", ["check-ignore", "--quiet", "--", relativePath], {
+    cwd: root,
+    stdio: "ignore",
+  });
+  return result.status === 0;
+}
 
 function* walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {

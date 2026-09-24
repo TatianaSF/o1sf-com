@@ -5,7 +5,8 @@ export function TatianaLink({ className }) {
 
   return (
     <a className={classes} href={TATIANA_SEARCH_URL} rel="noopener noreferrer" target="_blank">
-      TatianaSF
+      <span>TatianaSF</span>
+      <span aria-hidden="true">↗</span>
     </a>
   );
 }

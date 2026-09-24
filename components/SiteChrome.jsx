@@ -8,7 +8,7 @@ import { SiteHeader } from "./SiteHeader";
 export function SiteChrome({ children }) {
   const pathname = usePathname();
 
-  if (pathname?.startsWith("/923hy") || pathname?.startsWith("/tatianasf/assistant")) {
+  if (pathname?.startsWith("/923hy") || pathname?.startsWith("/ask_document") || pathname?.startsWith("/tatianasf/assistant")) {
     return children;
   }
 

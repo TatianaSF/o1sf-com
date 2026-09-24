@@ -23,14 +23,14 @@ const separate = [
 ];
 
 export const metadata = {
-  title: "Pricing — O1SF U.S. Market Entry",
+  title: "Pricing - O1SF U.S. Market Entry",
   description: "Program price, inclusions, exclusions and draft payment policy.",
 };
 
 export default function PricingPage() {
   return (
     <>
-      <section className="program-page-hero program-pricing-hero">
+      <section className="program-page-hero program-pricing-hero" id="program-price">
         <div className="program-shell program-pricing-hero-grid">
           <div>
             <p className="program-kicker">Simple company pricing</p>
@@ -62,7 +62,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="program-payment-section">
+      <section className="program-payment-section" id="bank-wire-payment">
         <div className="program-shell program-payment-grid">
           <div>
             <p className="program-kicker">Draft payment policy</p>
@@ -81,7 +81,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="program-refund-section">
+      <section className="program-refund-section" id="refund-policy">
         <div className="program-shell program-refund-grid">
           <div><p>Refund policy</p><h2>The signed agreement controls.</h2></div>
           <div>

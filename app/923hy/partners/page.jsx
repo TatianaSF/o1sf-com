@@ -11,14 +11,14 @@ const contributions = [
 ];
 
 export const metadata = {
-  title: "Partners — O1SF U.S. Market Entry",
+  title: "Partners - O1SF U.S. Market Entry",
   description: "Draft partnership and mentor opportunities for the O1SF program.",
 };
 
 export default function PartnersPage() {
   return (
     <>
-      <section className="program-page-hero program-partners-hero">
+      <section className="program-page-hero program-partners-hero" id="partnerships-and-support">
         <div className="program-shell program-page-hero-grid">
           <div><p className="program-kicker">Partnerships and support</p><h1>Help founders meet the U.S. market with better questions.</h1></div>
           <div><p className="program-page-lead">O1SF is exploring focused contributions from operators, investors, mentors and ecosystem organizations.</p><p className="program-partner-note">A formal sponsorship package and official contact channel are not confirmed in the current draft.</p></div>

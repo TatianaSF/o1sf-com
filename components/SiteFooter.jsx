@@ -1,40 +1,55 @@
 import Link from "next/link";
 
-import { GITHUB_REPO_URL } from "../lib/seo";
 import { SiteSignature } from "./SiteSignature";
-import { TatianaLink } from "./TatianaLink";
 
 export function SiteFooter() {
   return (
-    <footer className="footer">
-      <div className="footer-inner">
-        <div className="footer-links">
-          <Link href="/#reality" prefetch={false}>
-            Reality
-          </Link>
-          <Link href="/#other-side" prefetch={false}>
-            Other Side
-          </Link>
-          <Link href="/#experience" prefetch={false}>
-            Experience
-          </Link>
-          <Link href="/#filter" prefetch={false}>
-            Filter
-          </Link>
-          <Link href="/#outcome" prefetch={false}>
-            Outcome
-          </Link>
-          <TatianaLink />
-          <Link href="/sections" prefetch={false}>
-            Sections
-          </Link>
-          <a href={GITHUB_REPO_URL} rel="noopener noreferrer" target="_blank">
-            GitHub
-          </a>
+    <footer className="footer marketing-footer">
+      <div className="footer-inner marketing-footer-inner">
+        <nav className="footer-links" aria-label="Footer menu">
+          {[
+            ["Program", "/program", "program"],
+            ["Method", "/methodology", "methodology"],
+            ["Pricing", "/pricing", "pricing"],
+            ["Resources", "/resources", "resources"],
+            ["Host", "/tatianasf", "host"],
+            ["FAQ", "/#faq", "faq"],
+          ].map(([label, href, linkId]) => (
+            <Link
+              data-analytics-destination={href}
+              data-analytics-event="site_navigation_click"
+              data-analytics-link-id={linkId}
+              data-analytics-link-location="footer"
+              data-analytics-surface="site_chrome"
+              href={href}
+              key={href}
+              prefetch={false}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+        <div className="footer-legal-row" aria-label="Legal information">
+          <details id="privacy-note">
+            <summary>Privacy</summary>
+            <p>
+              This informational website does not include a contact form and does not collect or store
+              visitor submissions. It uses privacy-limited site analytics to understand aggregate use.
+            </p>
+          </details>
+          <details id="terms-note">
+            <summary>Terms</summary>
+            <p>
+              Program targets and conditional support are not guarantees of meetings, investment,
+              customers, partnerships, visas, formation, banking, or market outcomes.
+            </p>
+          </details>
         </div>
         <div className="footer-copy">
           <SiteSignature className="footer-signature" />
-          <p className="footer-love">with love ❤️ from 🌉 San Francisco</p>
+          <p className="footer-love">
+            © {new Date().getFullYear()} O1SF · with love ❤️ from 🌉 San Francisco
+          </p>
         </div>
       </div>
     </footer>

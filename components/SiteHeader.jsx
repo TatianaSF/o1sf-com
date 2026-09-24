@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { TATIANA_SEARCH_URL } from "../lib/seo";
 import { SiteSignature } from "./SiteSignature";
 
 const navItems = [
-  { label: "Frame", href: "/#hero" },
-  { label: "Standard", href: "/#other-side" },
-  { label: "Filter", href: "/#filter" },
-  { label: "TatianaSF", href: TATIANA_SEARCH_URL, external: true },
+  { id: "program", label: "Program", href: "/program" },
+  { id: "methodology", label: "Method", href: "/methodology" },
+  { id: "pricing", label: "Pricing", href: "/pricing" },
+  { id: "resources", label: "Resources", href: "/resources" },
+  { id: "host", label: "Host", href: "/tatianasf" },
 ];
 
 function MenuIcon({ open }) {
@@ -48,28 +48,26 @@ export function SiteHeader() {
     };
 
     window.addEventListener("keydown", closeOnEscape);
-
-    return () => {
-      window.removeEventListener("keydown", closeOnEscape);
-    };
+    return () => window.removeEventListener("keydown", closeOnEscape);
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
-  const renderNavLink = ({ label, href, external }) => {
-    if (external) {
-      return (
-        <a key={href} href={href} rel="noopener noreferrer" target="_blank" onClick={closeMenu}>
-          {label}
-        </a>
-      );
-    }
 
-    return (
-      <Link key={href} href={href} prefetch={false} onClick={closeMenu}>
-        {label}
-      </Link>
-    );
-  };
+  const renderNavLink = ({ id, label, href }, linkLocation) => (
+    <Link
+      data-analytics-destination={href}
+      data-analytics-event="site_navigation_click"
+      data-analytics-link-id={id}
+      data-analytics-link-location={linkLocation}
+      data-analytics-surface="site_chrome"
+      href={href}
+      key={href}
+      onClick={closeMenu}
+      prefetch={false}
+    >
+      {label}
+    </Link>
+  );
 
   return (
     <header className="site-header">
@@ -92,31 +90,18 @@ export function SiteHeader() {
           </button>
         </div>
         <nav className="nav-links desktop-nav" aria-label="Main menu">
-          {navItems.map(renderNavLink)}
+          {navItems.map((item) => renderNavLink(item, "desktop_header"))}
         </nav>
-        <Link className="nav-cta" href="/sections" prefetch={false}>
-          Archive
-        </Link>
         <div
-          className="mobile-menu"
-          id="mobile-menu"
           aria-hidden={!menuOpen}
+          className={`mobile-menu${menuOpen ? " mobile-menu-open" : ""}`}
+          id="mobile-menu"
           inert={!menuOpen}
         >
           {menuOpen ? (
-            <>
-              <nav className="mobile-nav-links" aria-label="Mobile main menu">
-                {navItems.map(renderNavLink)}
-              </nav>
-              <Link
-                className="button primary mobile-menu-cta"
-                href="/sections"
-                prefetch={false}
-                onClick={closeMenu}
-              >
-                Open Archive
-              </Link>
-            </>
+            <nav className="mobile-nav-links" aria-label="Mobile main menu">
+              {navItems.map((item) => renderNavLink(item, "mobile_menu"))}
+            </nav>
           ) : null}
         </div>
       </div>

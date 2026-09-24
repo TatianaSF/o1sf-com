@@ -42,14 +42,14 @@ const weeks = [
 ];
 
 export const metadata = {
-  title: "Program Structure — O1SF U.S. Market Entry",
+  title: "Program Structure - O1SF U.S. Market Entry",
   description: "How the two online weeks and San Francisco week work together.",
 };
 
 export default function ProgramStructurePage() {
   return (
     <>
-      <section className="program-page-hero program-page-hero-structure">
+      <section className="program-page-hero program-page-hero-structure" id="program-overview">
         <div className="program-shell program-page-hero-grid">
           <div>
             <p className="program-kicker">Program structure</p>
@@ -92,6 +92,24 @@ export default function ProgramStructurePage() {
             <div><strong>Conditional</strong><p>Specific mentors, introductions and meetings depend on relevance, readiness, interest and availability.</p></div>
             <div><strong>Pending</strong><p>Exact cohort dates, daily times, venues and the official application URL are not confirmed in the current draft.</p></div>
           </div>
+        </div>
+      </section>
+
+      <section className="program-investor-section" id="investor-access">
+        <div className="program-shell program-investor-grid">
+          <div className="program-section-heading">
+            <span>Investor access, clearly defined</span>
+            <h2>Prepare for the room. Do not confuse access with an investment promise.</h2>
+          </div>
+          <div className="program-investor-flow">
+            <div><span>Prepare</span><p>Pitch, target list, conversation strategy and follow-up system.</p></div>
+            <div><span>Connect</span><p>Relevant meetings and introductions when interest and availability align.</p></div>
+            <div><span>Present</span><p>Demo Day participation and an attendee summary when information may be shared.</p></div>
+          </div>
+          <aside>
+            <strong>Not guaranteed</strong>
+            <p>A specific investor meeting, written feedback, due diligence, a term sheet or investment.</p>
+          </aside>
         </div>
       </section>
 

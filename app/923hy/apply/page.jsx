@@ -4,14 +4,14 @@ import { FitCheck } from "../../../components/program/FitCheck";
 import { programBasePath } from "../../../lib/program-content";
 
 export const metadata = {
-  title: "Check Program Fit — O1SF U.S. Market Entry",
+  title: "Check Program Fit - O1SF U.S. Market Entry",
   description: "An informational fit check for the O1SF U.S. Market Entry Program.",
 };
 
 export default function ApplyPage() {
   return (
     <>
-      <section className="program-apply-hero">
+      <section className="program-apply-hero" id="application-process">
         <div className="program-shell program-apply-hero-grid">
           <div>
             <p className="program-kicker">Before the application</p>

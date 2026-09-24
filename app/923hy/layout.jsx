@@ -1,10 +1,9 @@
 import "./program.css";
 
-import { ProgramFooter } from "../../components/program/ProgramFooter";
-import { ProgramHeader } from "../../components/program/ProgramHeader";
+import { ProgramChrome } from "../../components/program/ProgramChrome";
 
 export const metadata = {
-  title: "O1SF U.S. Market Entry Program — Draft Preview",
+  title: "O1SF U.S. Market Entry Program - Draft Preview",
   description: "A local draft preview of the O1SF U.S. Market Entry Program and AI Guide.",
   referrer: "no-referrer",
   robots: {
@@ -21,12 +20,5 @@ export const metadata = {
 };
 
 export default function ProgramLayout({ children }) {
-  return (
-    <div className="program-site">
-      <a className="program-skip-link" href="#program-main">Skip to program content</a>
-      <ProgramHeader />
-      <main id="program-main">{children}</main>
-      <ProgramFooter />
-    </div>
-  );
+  return <ProgramChrome>{children}</ProgramChrome>;
 }

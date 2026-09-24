@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
-    "build": "next build",
+    "build": "next build && node scripts/finalize-static-output.mjs",
     "build:sites": "vinext build",
     "start": "next start",
     "lint": "eslint app components lib scripts --max-warnings=0",

@@ -12,8 +12,30 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP_HOST} !^o1sf\.com$ [NC]
   RewriteRule ^ https://o1sf.com%{REQUEST_URI} [R=301,L]
 
+  # Consolidate the previous visibility-era architecture into the current
+  # market-entry program and resource pages.
+  RewriteRule ^sections/?$ /resources [R=301,L]
+  RewriteRule ^sections/hero/?$ /tatianasf [R=301,L]
+  RewriteRule ^sections/reality/?$ /resources/us-market-entry-checklist [R=301,L]
+  RewriteRule ^sections/other-side/?$ /methodology [R=301,L]
+  RewriteRule ^sections/experience/?$ /tatianasf [R=301,L]
+  RewriteRule ^sections/filter/?$ /methodology [R=301,L]
+  RewriteRule ^sections/outcome/?$ /program [R=301,L]
+  RewriteRule ^sections\.json$ /pages.json [R=301,L]
+
+  # Keep the Ask Document demo as a physical directory for static deep links.
+  RewriteRule ^ask_document$ /ask_document/ [R=301,L]
+  RewriteRule ^ask_document/$ /ask_document/index.html [L]
+
+  # Next.js static export stores route prefetch payloads in a directory while
+  # the client requests the same segment as a dotted filename.
+  RewriteRule ^(.+)/(__next\.[^/.]+)\.([^.]+)\.__PAGE__\.txt$ $1/$2/$3/__PAGE__.txt [L]
+  RewriteRule ^(.+)/(__next\.[^/.]+)\.([^.]+)\.txt$ $1/$2/$3.txt [L]
+  RewriteRule ^(.+)/(__next\.[^/]+)\.__PAGE__\.txt$ $1/$2/__PAGE__.txt [L]
+
   # Next.js exports routes as route.html. Serve them at extensionless URLs.
   RewriteCond %{REQUEST_URI} !^/$
+  RewriteCond %{REQUEST_URI} !^/ask_document/$
   RewriteCond %{REQUEST_URI} ^(.+)/$
   RewriteRule ^(.+)/$ /$1 [R=301,L]
 
@@ -25,11 +47,16 @@ ErrorDocument 404 /404.html
 <IfModule mod_headers.c>
   <IfModule mod_setenvif.c>
     SetEnvIf Request_URI "^/923hy(?:/|$)" o1sf_private_preview
+    SetEnvIf Request_URI "^/ask_document(?:/|$)" o1sf_private_preview
+    SetEnvIf Request_URI "^/clear-site-data(?:\.html)?$" o1sf_clear_site_data
+    SetEnvIf Request_URI "^/clear-site-data(?:\.html)?$" o1sf_private_preview
+    SetEnvIf Request_URI "^/(?:profile|pages)\.json$" o1sf_machine_feed
+    SetEnvIf Request_URI "^/llms\.txt$" o1sf_machine_feed
   </IfModule>
 
   Header always unset X-Powered-By
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; media-src 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://cloudflareinsights.com; media-src 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests"
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "DENY"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
@@ -41,18 +68,41 @@ ErrorDocument 404 /404.html
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   <FilesMatch "\.(?:png|jpe?g|gif|webp|svg|ico)$">
-    Header set Cache-Control "public, max-age=604800"
+    Header set Cache-Control "public, max-age=2592000, stale-while-revalidate=86400"
   </FilesMatch>
   <FilesMatch "\.(?:html|json|txt|xml|webmanifest)$">
-    Header set Cache-Control "public, max-age=300, must-revalidate"
+    Header set Cache-Control "public, max-age=300, must-revalidate" "expr=%{REQUEST_URI} !~ m#^/(923hy|ask_document)(/|$)# && %{REQUEST_URI} !~ m#^/clear-site-data([.]html)?$#"
   </FilesMatch>
+
+  # This endpoint deliberately clears only data associated with o1sf.com in
+  # the current browser. It remains usable even when the app JavaScript did
+  # not load, which is the condition it is designed to recover from.
+  Header always set Clear-Site-Data '"cache", "cookies", "storage"' env=o1sf_clear_site_data
+  Header unset Cache-Control env=o1sf_clear_site_data
+  Header always unset Cache-Control env=o1sf_clear_site_data
+  Header always set Cache-Control "no-store, max-age=0" env=o1sf_clear_site_data
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex" env=o1sf_clear_site_data
+  Header always set Referrer-Policy "no-referrer" env=o1sf_clear_site_data
 
   # Keep the unlisted program preview out of search and referral logs without
   # advertising its path through robots.txt.
   Header always set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex" env=o1sf_private_preview
   Header always set Referrer-Policy "no-referrer" env=o1sf_private_preview
+  Header set Cache-Control "private, no-store" env=o1sf_private_preview
   Header always set Cache-Control "private, no-store" env=o1sf_private_preview
+
+  # Machine-readable feeds support discovery, but the human HTML pages are
+  # the canonical search results.
+  Header always set X-Robots-Tag "noindex, follow" env=o1sf_machine_feed
 </IfModule>
+
+<Files "clear-site-data.html">
+  <IfModule mod_headers.c>
+    Header unset Cache-Control
+    Header always unset Cache-Control
+    Header always set Cache-Control "no-store, max-age=0"
+  </IfModule>
+</Files>
 
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml

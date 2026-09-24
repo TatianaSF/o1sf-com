@@ -11,3 +11,6 @@ design/*-viewport.png
 design/*-fullpage.png
 
 .vercel
+
+# Private build input for the Ask Document demo. Never deploy or commit it.
+private-input/

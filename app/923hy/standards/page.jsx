@@ -3,7 +3,7 @@ import Link from "next/link";
 import { programBasePath } from "../../../lib/program-content";
 import { programPolicies } from "../../../lib/program-policies";
 
-export const metadata = { title: "Program Standards — O1SF Draft Preview" };
+export const metadata = { title: "Program Standards - O1SF Draft Preview" };
 
 export default function StandardsPage() {
   return (
@@ -12,7 +12,7 @@ export default function StandardsPage() {
         <div className="program-shell">
           <p className="program-kicker">Clear rules before commitment</p>
           <h1>Program standards</h1>
-          <p>Privacy, public promises and participant requirements—written to make the boundaries of the program visible before applications open.</p>
+          <p>Privacy, public promises and participant requirements - written to make the boundaries of the program visible before applications open.</p>
         </div>
       </section>
       <section className="program-standards-grid-section">

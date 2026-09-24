@@ -21,14 +21,14 @@ const boundaries = [
 ];
 
 export const metadata = {
-  title: "Expected Results — O1SF U.S. Market Entry",
+  title: "Expected Results - O1SF U.S. Market Entry",
   description: "Expected program deliverables, targets and non-guaranteed outcomes.",
 };
 
 export default function ResultsPage() {
   return (
     <>
-      <section className="program-page-hero program-results-hero">
+      <section className="program-page-hero program-results-hero" id="expected-results">
         <div className="program-shell program-results-hero-grid">
           <div>
             <p className="program-kicker">Expected results</p>
@@ -36,7 +36,7 @@ export default function ResultsPage() {
           </div>
           <div className="program-result-principle">
             <span>Program success definition</span>
-            <p>A founder finishes with a more structured, tested and documented approach to U.S. market entry—not with a promised business outcome.</p>
+            <p>A founder finishes with a more structured, tested and documented approach to U.S. market entry - not with a promised business outcome.</p>
           </div>
         </div>
       </section>

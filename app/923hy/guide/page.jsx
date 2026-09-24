@@ -1,7 +1,7 @@
 import { ProgramGuide } from "../../../components/program/ProgramGuide";
 
 export const metadata = {
-  title: "AI Guide — O1SF U.S. Market Entry",
+  title: "AI Guide - O1SF U.S. Market Entry",
   description: "Ask questions about the draft O1SF U.S. Market Entry Program knowledge base.",
 };
 
