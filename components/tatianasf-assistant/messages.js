@@ -1,5 +1,9 @@
 export const messages = {
   en: {
+    profileRole: "Independent Codex Community Ambassador",
+    profileDescriptor: "Founder • Event Host • Community Builder",
+    profileSummary: "Events, partnerships, collaborations and professional opportunities.",
+    profileAlt: "TatianaSF ambassador profile",
     start: "Hi! What would you like to talk about?",
     choices: {
       attend: "I'd like to attend an event",
@@ -39,6 +43,10 @@ export const messages = {
     linkedin: "Open TatianaSF LinkedIn profile",
   },
   ru: {
+    profileRole: "Независимый амбассадор сообщества Codex",
+    profileDescriptor: "Основатель • Организатор мероприятий • Community Builder",
+    profileSummary: "Мероприятия, партнёрства, сотрудничество и профессиональные возможности.",
+    profileAlt: "Профиль TatianaSF, амбассадор сообщества",
     start: "Здравствуйте! О чём вы хотели бы поговорить?",
     choices: { attend: "Я хочу посетить мероприятие", active: "Я хочу активную роль на мероприятии", sponsor: "Я хочу спонсировать мероприятие", hire: "Я хочу нанять TatianaSF", partnership: "Я хочу обсудить партнёрство" },
     activeEvent: "Какой тип мероприятия вас интересует?", commercial: "B4SF.com Commercial Event", codex: "Codex Community Event",
