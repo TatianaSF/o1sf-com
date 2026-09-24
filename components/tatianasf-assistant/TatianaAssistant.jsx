@@ -1,23 +1,26 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { messages } from "./messages";
 import { buildHandoff } from "./workflow";
 import styles from "./TatianaAssistant.module.css";
 
 const budgetChoices = (t) => [...t.budgets];
+const subscribeToLanguage = () => () => {};
+const getLanguageSnapshot = () => new URLSearchParams(window.location.search).has("ru");
+const getServerLanguageSnapshot = () => false;
 
 export default function TatianaAssistant() {
-  const [ru] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).has("ru"));
+  const ru = useSyncExternalStore(subscribeToLanguage, getLanguageSnapshot, getServerLanguageSnapshot);
   const [history, setHistory] = useState([]);
   const [state, setState] = useState({});
   const [step, setStep] = useState({ id: "start", choices: [] });
   const [copyStatus, setCopyStatus] = useState("idle");
   const t = useMemo(() => messages[ru ? "ru" : "en"], [ru]);
-  const push = (answer, next, patch = {}) => { setHistory((h) => [...h, { answer, step }]); setState((s) => ({ ...s, ...patch })); setStep(next); };
-  const resetFrom = (index) => { const item = history[index]; setHistory(history.slice(0, index)); setStep(item.step); setState({}); };
-  const final = (answer, patch) => { const nextState = { ...state, ...patch }; setState(nextState); setHistory((h) => [...h, { answer, step }]); setStep({ id: "final", choices: [] }); };
+  const push = (answer, next, patch = {}) => { setHistory((h) => [...h, { answer, step, state: { ...state } }]); setState((s) => ({ ...s, ...patch })); setStep(next); };
+  const resetFrom = (index) => { const item = history[index]; setHistory(history.slice(0, index)); setStep(item.step); setState(item.state || {}); };
+  const final = (answer, patch) => { const nextState = { ...state, ...patch }; setState(nextState); setHistory((h) => [...h, { answer, step, state: { ...state } }]); setStep({ id: "final", choices: [] }); };
   const choose = (key) => {
     if (step.id === "start") return push(t.choices[key], { id: key === "active" ? "activeEvent" : key === "sponsor" ? "sponsorBudget" : key === "hire" ? "hireBudget" : key === "partnership" ? "partnershipType" : "attendEnd", choices: key === "active" ? ["commercial", "codex"] : key === "sponsor" || key === "hire" ? ["yes", "notYet"] : key === "partnership" ? ["partnershipChoices"] : [] }, { category: key });
     if (step.id === "activeEvent") return push(t[key], { id: key === "codex" ? "codexNote" : "role", choices: key === "codex" ? ["continueRole"] : ["roleChoices"] }, { eventType: t[key] });
@@ -27,7 +30,11 @@ export default function TatianaAssistant() {
     if (step.id === "budget") return key === "$50,000+" && state.category === "active" ? final(key, { budget: key }) : push(key, { id: key === "Less than $5,000" || key === "Меньше $5,000" ? "lowerBudget" : "final", choices: key === "Less than $5,000" || key === "Меньше $5,000" ? ["lowerBudgets"] : [] }, { budget: key });
     if (step.id === "lowerBudget") return final(key, { budget: key });
     if (step.id === "budgetStatus") return key === "notYet" ? push(t.notYet, { id: "noBudget", choices: ["findEvents"] }) : push(t.yes, { id: "budget", choices: ["budgets"] }, { approved: true });
-    if (step.id === "partnershipType") return key === "We can offer future commissions" || key === "Мы можем предложить будущие комиссии" ? push(key, { id: "paidBudget", choices: ["yes", "notYet"] }, { partnershipType: key }) : push(key, { id: "budget", choices: ["budgets"] }, { partnershipType: key, approved: true });
+    if (step.id === "partnershipType") {
+      if (key === "We can offer future commissions" || key === "Мы можем предложить будущие комиссии") return push(key, { id: "paidBudget", choices: ["yes", "notYet"] }, { partnershipType: key });
+      if (key === "We don't have an approved budget yet" || key === "У нас пока нет утверждённого бюджета") return push(key, { id: "noBudget", choices: ["findEvents"] }, { partnershipType: key });
+      return push(key, { id: "budget", choices: ["budgets"] }, { partnershipType: key, approved: true });
+    }
     if (step.id === "findEvents") window.open("https://www.google.com/search?q=TatianaSF+lu.ma", "_blank", "noopener,noreferrer");
   };
   const copyMessage = async () => {
