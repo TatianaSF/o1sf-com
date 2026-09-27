@@ -13,6 +13,7 @@
     "test": "node --test tests/ai-future-sim*.test.mjs",
     "analyze:ai-future-sim": "node scripts/analyze-ai-future-sim.mjs",
     "validate:ai-future-sim": "node scripts/validate-ai-future-sim.mjs",
+    "verify:ask-document-output": "node scripts/verify-ask-document-output.mjs",
     "typecheck": "tsc --noEmit --allowJs --checkJs --module NodeNext --moduleResolution NodeNext --target ES2022 --lib ES2022,DOM features/ai-future-sim/engine/domain.js features/ai-future-sim/engine/index.js features/ai-future-sim/content/player-explanations.js features/ai-future-sim/config/language.js features/ai-future-sim/i18n/index.js"
   },
   "dependencies": {
