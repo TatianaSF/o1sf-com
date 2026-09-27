@@ -5,11 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
-    "build": "next build && node scripts/finalize-static-output.mjs",
+    "build": "npm run validate:ai-future-sim && next build && node scripts/finalize-static-output.mjs",
     "build:sites": "vinext build",
     "start": "next start",
-    "lint": "eslint app components lib scripts --max-warnings=0",
-    "public-safety": "node scripts/public-safety-scan.mjs"
+    "lint": "eslint app components lib scripts features --max-warnings=0",
+    "public-safety": "node scripts/public-safety-scan.mjs",
+    "test": "node --test tests/ai-future-sim*.test.mjs",
+    "analyze:ai-future-sim": "node scripts/analyze-ai-future-sim.mjs",
+    "validate:ai-future-sim": "node scripts/validate-ai-future-sim.mjs",
+    "typecheck": "tsc --noEmit --allowJs --checkJs --module NodeNext --moduleResolution NodeNext --target ES2022 --lib ES2022,DOM features/ai-future-sim/engine/domain.js features/ai-future-sim/engine/index.js features/ai-future-sim/content/player-explanations.js features/ai-future-sim/config/language.js"
   },
   "dependencies": {
     "next": "^16.2.10",
@@ -25,7 +29,8 @@
     "react-server-dom-webpack": "19.2.7",
     "vinext": "0.0.50",
     "vite": "8.0.13",
-    "wrangler": "4.92.0"
+    "wrangler": "4.92.0",
+    "typescript": "^5.9.3"
   },
   "overrides": {
     "next": {

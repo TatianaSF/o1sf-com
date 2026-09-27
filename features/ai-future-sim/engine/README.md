@@ -1,0 +1,3 @@
+# Engine boundary
+
+Simulation rules belong here as pure functions over scenario data and serializable state. This layer must not import React, browser UI, or presentation components. The engine follows authored `nextLevelId` graph transitions; the content validator checks those links before the site build. It supports scenario start, role and mission selection, level reads, conditions, choice locks, resource/world effects, delayed consequences, deterministic advancement, and safe invalid-transition rejection. An ending node resolves ordered authored condition sets after applying consequences revealed on entry; it never generates an outcome. It contains no randomness, model runtime, or persistence.

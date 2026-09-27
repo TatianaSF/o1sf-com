@@ -1,0 +1,128 @@
+{
+  "participant_id": "participant_04",
+  "status": "NOT_STARTED",
+  "session_conditions": {
+    "route": "/ai-future-sim",
+    "playtest_query_used": false,
+    "first_time_participant": true,
+    "session_notes": null
+  },
+  "stages": [
+    {
+      "level_id": "starting_point",
+      "selected_choice_id": null,
+      "stated_reason": null,
+      "resource_cost": {
+        "noticed": null,
+        "understood_resource": null,
+        "used_in_decision": null,
+        "misunderstood_meaning": null,
+        "notes": null
+      },
+      "locked_options": [],
+      "expected_consequence": null,
+      "confusion": null,
+      "hesitation": null,
+      "spontaneous_reaction": null,
+      "sense_of_agency": null
+    },
+    {
+      "level_id": "immediate_impact",
+      "selected_choice_id": null,
+      "stated_reason": null,
+      "resource_cost": {
+        "noticed": null,
+        "understood_resource": null,
+        "used_in_decision": null,
+        "misunderstood_meaning": null,
+        "notes": null
+      },
+      "locked_options": [],
+      "expected_consequence": null,
+      "confusion": null,
+      "hesitation": null,
+      "spontaneous_reaction": null,
+      "sense_of_agency": null
+    },
+    {
+      "level_id": "business_and_work",
+      "selected_choice_id": null,
+      "stated_reason": null,
+      "resource_cost": {
+        "noticed": null,
+        "understood_resource": null,
+        "used_in_decision": null,
+        "misunderstood_meaning": null,
+        "notes": null
+      },
+      "locked_options": [],
+      "expected_consequence": null,
+      "confusion": null,
+      "hesitation": null,
+      "spontaneous_reaction": null,
+      "sense_of_agency": null
+    },
+    {
+      "level_id": "market_society_shift",
+      "selected_choice_id": null,
+      "stated_reason": null,
+      "resource_cost": {
+        "noticed": null,
+        "understood_resource": null,
+        "used_in_decision": null,
+        "misunderstood_meaning": null,
+        "notes": null
+      },
+      "locked_options": [],
+      "expected_consequence": null,
+      "confusion": null,
+      "hesitation": null,
+      "spontaneous_reaction": null,
+      "sense_of_agency": null
+    },
+    {
+      "level_id": "second_order_effects",
+      "selected_choice_id": null,
+      "stated_reason": null,
+      "resource_cost": {
+        "noticed": null,
+        "understood_resource": null,
+        "used_in_decision": null,
+        "misunderstood_meaning": null,
+        "notes": null
+      },
+      "locked_options": [],
+      "expected_consequence": null,
+      "confusion": null,
+      "hesitation": null,
+      "spontaneous_reaction": null,
+      "sense_of_agency": null
+    }
+  ],
+  "delayed_consequences": [],
+  "ending": {
+    "answer_why_reached_future_before_reading": null,
+    "decisions_they_think_mattered_before_reading": null,
+    "product_explanation_read_after_answers": null,
+    "comprehension_after_reading": null,
+    "explanation_fit_in_participant_words": null
+  },
+  "replay": {
+    "intent": null,
+    "choice_id_to_change": null,
+    "expected_result_if_changed": null,
+    "preference": null
+  },
+  "end_of_session": {
+    "most_memorable_moment": null,
+    "most_confusing_moment": null,
+    "strongest_decision_id": null,
+    "weakest_decision_id": null,
+    "most_meaningful_consequence_id": null,
+    "least_meaningful_consequence_id": null,
+    "keep_unchanged": null,
+    "improve": null,
+    "experience_type_in_participant_words": null
+  },
+  "issues": []
+}

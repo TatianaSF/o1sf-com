@@ -1,0 +1,9 @@
+# Content boundary
+
+Versioned scenario records, roles, missions, levels, choices, conditions, effects, and delayed-consequence definitions belong here. Presentation code consumes these records and does not embed scenario copy or game rules. Scenario modules use the `*.scenario.js` suffix and default-export one scenario; the validator discovers those modules automatically. The Founder organization scenario is in `scenarios/founder-organization.scenario.js`.
+
+Call `validateScenario(scenario)` for a single record or `validateScenarios(scenarios)` for a collection. Every standard `decision` node has exactly seven choices. `narrative` nodes have a single explicit next-level transition; `follow_up` is a bounded special node with one to three choices. An `ending` node can define ordered, condition-based ending outcomes and must end with exactly one unconditional fallback. The engine selects the first matching authored outcome after applying consequences revealed on entry. The validator reports accidental cycles as errors; intentional cycles require `graphPolicy.allowIntentionalCycles: true` and are surfaced as warnings.
+
+The six player-facing Founder years converge through five shared decision nodes into one Future World resolver. Choice history and world state preserve consequences across the shared graph; do not clone downstream level content for each prior combination.
+
+Each scenario has a stable machine-readable `version` integer alongside its stable `id`. Founder is approved as `founder_ai_organization` version `1`. Once analytics or user sessions exist, any material gameplay change to choices, effects, conditions, unlocks, delayed consequences, or ending rules must increment the scenario version so persisted sessions and analytics remain interpretable. Copy-only corrections that do not change gameplay semantics may keep the current version.
