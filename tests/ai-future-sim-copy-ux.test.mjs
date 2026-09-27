@@ -79,7 +79,7 @@ test("pre-decision costs are derived from authored resource effects only", async
     readFile(new URL("../features/ai-future-sim/ui/AiFutureSimLanding.jsx", import.meta.url), "utf8"),
     readFile(new URL("../features/ai-future-sim/ui/AiFutureSimPrimitives.jsx", import.meta.url), "utf8"),
   ]);
-  assert.match(ui, /getChoiceResourceCosts\(authoredChoice\)/);
+  assert.match(ui, /getChoiceResourceCosts\(authoredChoice, language\)/);
   assert.match(primitives, /resourceCosts\.map\(\(\{ resourceId, label, amount \}\)/);
   assert.match(primitives, /className=\{styles\.costChip\}/);
   assert.doesNotMatch(primitives, /choice\.outcome|delayedConsequences|consequence\.title|consequence\.description/);
@@ -175,7 +175,7 @@ test("choice costs and ending explanations stay separate from production debug d
   const explanation = await readFile(new URL("../features/ai-future-sim/content/player-explanations.js", import.meta.url), "utf8");
   assert.match(ui, /process\.env\.NODE_ENV === "development"/);
   assert.match(ui, /get\("playtest"\) === "1"/);
-  assert.match(ui, /<h2>Why this future\?<\/h2>/);
+  assert.match(ui, /<h2>\{getUiCopy\(language, "whyFuture"/);
   assert.doesNotMatch(explanation, /evaluationOrder|higherPriorityEvaluations|relevantFinalWorldState/);
   assert.doesNotMatch(ui, /Cost:\s*(?:Capital|Time|Organizational capacity)\s+\d/);
 });

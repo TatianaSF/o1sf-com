@@ -20,7 +20,7 @@ export function SelectionCard({ title, description, className = "", ...props }) 
   );
 }
 
-export function ChoiceCard({ choice, index, resourceCosts, onSelect, lockId }) {
+export function ChoiceCard({ choice, index, resourceCosts, onSelect, lockId, language = "en", costLabel = "Cost", lockedLabel = "Locked" }) {
   return (
     <li className={styles.choiceItem}>
       <button
@@ -36,17 +36,17 @@ export function ChoiceCard({ choice, index, resourceCosts, onSelect, lockId }) {
           <span className={styles.choiceTitle}>{choice.title}</span>
           <span className={styles.choiceDescription}>{choice.description}</span>
           {resourceCosts.length > 0 && (
-            <span className={styles.costList} aria-label={`Cost: ${resourceCosts.map(({ label, amount }) => `${label} ${amount}`).join(", ")}`}>
-              <span className={styles.costLabel}>Cost</span>
+            <span className={styles.costList} aria-label={`${costLabel}: ${resourceCosts.map(({ label, amount }) => `${label} ${amount}`).join(", ")}`} lang={language}>
+              <span className={styles.costLabel}>{costLabel}</span>
               {resourceCosts.map(({ resourceId, label, amount }) => (
                 <span className={styles.costChip} key={resourceId}>{label} <strong>{amount}</strong></span>
               ))}
             </span>
           )}
         </span>
-        <span className={styles.choiceAffordance} aria-hidden="true">{choice.available ? "→" : "Locked"}</span>
+        <span className={styles.choiceAffordance} aria-hidden="true">{choice.available ? "→" : lockedLabel}</span>
       </button>
-      {!choice.available && <p className={styles.lockReason} id={lockId}>{choice.lockedReason}</p>}
+      {!choice.available && <p className={styles.lockReason} id={lockId} lang={language}>{choice.lockedReason}</p>}
     </li>
   );
 }

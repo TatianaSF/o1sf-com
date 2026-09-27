@@ -2,8 +2,20 @@ export const supportedLanguages = Object.freeze(["en", "ru"]);
 export const productionLanguage = "en";
 
 /**
- * Production always resolves to English. Russian requires an explicit internal
- * manual-development configuration; this resolver is not connected to the UI.
+ * Resolves the hidden, explicitly requested language flag. It deliberately
+ * ignores browser preferences and accepts only a bare `?ru` parameter.
+ * @param {string} search
+ * @returns {"en" | "ru"}
+ */
+export function resolveAiFutureSimLanguageFromSearch(search = "") {
+  const params = new URLSearchParams(search);
+  return params.has("ru") && params.get("ru") === "" ? "ru" : productionLanguage;
+}
+
+/**
+ * Language resolution for explicit configuration that is not sourced from the
+ * public query string. The UI uses resolveAiFutureSimLanguageFromSearch for its
+ * hidden, manually requested `?ru` presentation mode.
  * @param {{mode?: string, developmentLanguage?: string}} options
  * @returns {"en" | "ru"}
  */

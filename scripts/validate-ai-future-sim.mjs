@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { validateScenarios } from "../features/ai-future-sim/content/validate-scenario.js";
+import { validateLocaleCompleteness } from "../features/ai-future-sim/i18n/index.js";
 import { scanAiFutureSimRuntime } from "./ai-future-sim-runtime-guard.mjs";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -58,6 +59,13 @@ export async function loadAiFutureSimScenarios(root = projectRoot) {
 export async function validateAiFutureSimProject(root = projectRoot) {
   const { scenarios, loadErrors } = await loadAiFutureSimScenarios(root);
   const content = validateScenarios(scenarios);
+  const localizationErrors = scenarios.flatMap((scenario) => validateLocaleCompleteness(scenario).missing.map((field) => ({
+    code: "missing_russian_localization",
+    sourceEntity: `scenario:${scenario.id}`,
+    field,
+    referencedId: null,
+    reason: "Every normal player-facing English string must have authored Russian copy for the hidden ?ru mode.",
+  })));
   const runtimeGuard = await scanAiFutureSimRuntime(root);
   const runtimeErrors = runtimeGuard.violations.map((violation) => ({
     code: violation.code,
@@ -66,11 +74,12 @@ export async function validateAiFutureSimProject(root = projectRoot) {
     referencedId: violation.match,
     reason: violation.reason,
   }));
-  const errors = [...loadErrors, ...content.errors, ...runtimeErrors];
+  const errors = [...loadErrors, ...content.errors, ...localizationErrors, ...runtimeErrors];
   return {
     valid: errors.length === 0,
     scenarios,
     content,
+    localizationErrors,
     runtimeGuard,
     errors,
     warnings: content.warnings,
@@ -100,6 +109,7 @@ async function main() {
     );
   }
   console.log(`No-LLM runtime guard passed across ${result.runtimeGuard.scannedFiles} product source file(s).`);
+  console.log("Hidden Russian player-copy completeness passed.");
   printIssues("WARNING", result.warnings);
 }
 
